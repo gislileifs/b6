@@ -1,0 +1,43 @@
+<html xmlns:c="http://java.sun.com/jsp/jstl/core"  
+xmlns:spring="http://www.springframework.org/tags" 
+xmlns:tiles="http://tiles.apache.org/tags-tiles" 
+xmlns:jsp="http://java.sun.com/JSP/Page">
+
+	<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />  
+
+<head>
+	<meta charset="utf-8"/>
+	<spring:url value="/css" var="styleUrl" />
+	<link href="resources/css/main.css" rel="stylesheet"/>
+	<link href="resources/bootstrap/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+	<link href="resources/bootstrap/bower_components/metisMenu/dist/metisMenu.css" rel="stylesheet"/>
+	<link href="resources/dist/css/sb-admin-2.css" rel="stylesheet"/>
+	<link href="resources/css/morris.css" rel="stylesheet"/>
+	<link href="resources/bootstrap/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+	<link href="resources/dist/css/timeline.css" rel="stylesheet"/>
+	
+</head>
+<body>
+	<div id="wrapper">
+		<jsp:include page="/WEB-INF/views/menu.jsp"/>	
+
+		<div id="page-wrapper">
+			<tiles:insertAttribute name="main" />
+		</div>
+
+	</div>
+	<a href="#" onclick="test();"> Click me! </a>
+
+	<spring:url value="resources/js/main.js" var="main_js" />	
+	<script src="${main_js}" type="text/javascript"><!-- required for FF3 and Opera --></script>
+	<script src="resources/jquery/dist/jquery.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
+	<script src="resources/bootstrap/bower_components/bootstrap/dist/js/bootstrap.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
+	<script src="resources/bootstrap/bower_components/metisMenu/dist/metisMenu.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
+	<script src="resources/bootstrap/bower_components/morrisjs/morris.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
+	<script src="resources/bootstrap/bower_components/raphael/raphael.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
+	<script src="resources/dist/js/sb-admin-2.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
+	<script src="resources/js/morris-data.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
+
+</body>
+</html>
