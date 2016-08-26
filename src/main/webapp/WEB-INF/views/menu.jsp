@@ -19,7 +19,7 @@
             
             <ul class="nav navbar-top-links navbar-right">
            	    <c:if test="${pageContext.request.userPrincipal.name != null}">
-            	<li style="padding-left: 30px">
+            	<li style="padding-left: 20px">
 		${pageContext.request.userPrincipal.name}
             	</li>
 				</c:if>

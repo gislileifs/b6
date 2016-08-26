@@ -3,6 +3,8 @@ package gisli.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -20,29 +22,49 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "gisli")
+@Import({ SecurityConfig.class })
 public class TilesConfiguration extends WebMvcConfigurerAdapter {
-/*
+
 	@Bean
-    public ViewResolver viewResolver() {
+    public ViewResolver plainViewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/views/");
+        viewResolver.setOrder(2);
         viewResolver.setSuffix(".jsp");
  
         return viewResolver;
     }
-    */
+  
     
     @Bean
     public UrlBasedViewResolver viewResolver() {
         UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
         viewResolver.setViewClass(TilesView.class);
+        viewResolver.setOrder(1);
         return viewResolver;
     }
-    
+  /*  
+    @Bean
+    public ViewResolver ajaxViewResolver() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        //viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix("/WEB-INF/views/");
+        viewResolver.setSuffix(".jsp");
+        return viewResolver;
+    }
+
+    @Bean
+    public AjaxUrlBasedViewResolver ajaxViewResolver() {
+        AjaxUrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
+        viewResolver.setViewClass(TilesView.class);
+        return viewResolver;
+    }
+  */  
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/images/**").addResourceLocations("file:/Library/apache-tomcat-8.0.33/img/");
     }
 
     @Bean
@@ -56,4 +78,15 @@ public class TilesConfiguration extends WebMvcConfigurerAdapter {
         return tilesConfigurer;
     }
  
+	@Bean(name = "dataSource")
+	public DriverManagerDataSource dataSource() {
+		System.out.println( "Datasource being initialized..." );
+	    DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+	    //driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+	    driverManagerDataSource.setUrl("jdbc:mysql://192.168.2.108:3306/test");
+	    driverManagerDataSource.setUsername("gisli");
+	    driverManagerDataSource.setPassword("gisli.123");
+	    System.out.println("Finished initializing mysql...");
+	    return driverManagerDataSource;
+	}
 }

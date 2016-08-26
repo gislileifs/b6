@@ -9,9 +9,13 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import gisli.model.*;
@@ -32,7 +36,7 @@ public class TilesController {
     public String dashboard(ModelMap model) {
         model.addAttribute("greeting", "Tiles! Spring 4 MVC");
         
-        mongo.test();
+        //mongo.test();
         
         return "tiles/page1";
     }
@@ -41,13 +45,27 @@ public class TilesController {
     public String page2(ModelMap model) {
         model.addAttribute("greeting", "Tiles! Spring 4 MVC");
         
-        Recipe r = new Recipe( "Karrýlamb" );
-        mongo.insert(r);
-        
         RecipeList recipes = mongo.getAllRecipes();
         model.addAttribute("recipes", recipes );
         
         return "tiles/page2";
+    }    
+    
+    @RequestMapping(value = "/winelog", method = RequestMethod.GET)
+    public String winelog(ModelMap model) {
+        model.addAttribute("greeting", "Tiles! Spring 4 MVC");
+        
+        return "tiles/winelog";
+    }    
+
+    @RequestMapping(value = "/winerecipes", method = RequestMethod.GET)
+    public String wineRecipes(ModelMap model) {
+        return "tiles/winerecipes";
+    }    
+
+    @RequestMapping(value = "/todo", method = RequestMethod.GET)
+    public String toDo(ModelMap model) {
+        return "tiles/todo";
     }    
     
     @RequestMapping(value = "/deleteRecipe", method = RequestMethod.GET)
@@ -84,8 +102,23 @@ public class TilesController {
         return "tiles/page3";
     }
 
-    @RequestMapping(value = "/partialViewTest", method = RequestMethod.GET, produces = "text/html" )    
-    public String partialViewTest() {
-    	return "tiles/page3";
+    @RequestMapping(value = "/partialViewTest", method = RequestMethod.GET)    
+    public String partialViewTest( String param, String other, ModelMap model ) {
+    	model.addAttribute("myparam", param);
+    	model.addAttribute("other", other);
+    	model.addAttribute("testparam", "testvalue");
+    	return "test";
+    }
+    
+    @RequestMapping(value = "/angularView", method = RequestMethod.GET)    
+    public String angularView( ModelMap model ) {
+    	return "tiles/angularView";
+    }
+    
+    @RequestMapping(value = "/recipe/{id}", method = RequestMethod.GET)    
+    public String recipeView( @PathVariable("id") String id, ModelMap model) {
+    	Recipe r = mongo.getRecipe(id);
+    	model.addAttribute("recipe", r);
+    	return "recipe";
     }
 }

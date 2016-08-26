@@ -16,7 +16,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 public class TilesInitializer implements WebApplicationInitializer {
  
     public void onStartup(ServletContext container) throws ServletException {
- 
+    	System.out.println("xxxx - At tiles startup");
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(TilesConfiguration.class);
         ctx.setServletContext(container);
@@ -32,6 +32,8 @@ public class TilesInitializer implements WebApplicationInitializer {
         characterEncodingFilter.setForceEncoding(true);
         FilterRegistration.Dynamic characterEncoding = container.addFilter("characterEncoding", characterEncodingFilter);
         characterEncoding.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
+        
+        System.out.println("xxxx - End of tiles startup");
     }
  
 }

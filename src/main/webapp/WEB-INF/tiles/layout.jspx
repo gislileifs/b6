@@ -8,36 +8,51 @@ xmlns:jsp="http://java.sun.com/JSP/Page">
 
 <head>
 	<meta charset="utf-8"/>
+	<!-- meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" -->
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<spring:url value="/css" var="styleUrl" />
-	<link href="resources/css/main.css" rel="stylesheet"/>
 	<link href="resources/bootstrap/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
 	<link href="resources/bootstrap/bower_components/metisMenu/dist/metisMenu.css" rel="stylesheet"/>
 	<link href="resources/dist/css/sb-admin-2.css" rel="stylesheet"/>
 	<link href="resources/css/morris.css" rel="stylesheet"/>
 	<link href="resources/bootstrap/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet"/>
-	<link href="resources/dist/css/timeline.css" rel="stylesheet"/>
-	
+	<link href="resources/dist/css/timeline.css" rel="stylesheet"/>	
+	<link href="resources/css/angular-material.min.css" rel="stylesheet"/>
+	<link href="resources/css/main.css" rel="stylesheet"/>
+	 
+	<script src="resources/jquery/dist/jquery.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
+        <script src="resources/js/angular/dist/angular.js"><!--xx--></script>
+	  <script src="resources/js/angular/dist/angular-animate.js"><!--xx--></script>
+  <script src="resources/js/angular/dist/angular-aria.js"><!--xx--></script>
+  <script src="resources/js/angular/dist/angular-messages.js"><!--xx--></script>
+  <script src="resources/js/angular/dist/angular-material.js"><!--xx--></script>
+  <script src="resources/js/moment.js"><!--xx--></script>      
+      <script src="resources/js/angular/app.js"><!--xx--></script>      
+
 </head>
 <body>
 	<div id="wrapper">
 		<jsp:include page="/WEB-INF/views/menu.jsp"/>	
 
-		<div id="page-wrapper">
+		<div id="page-wrapper" style="width: auto; height: auto;; background-image: url(/images/background1.jpg)" >>
 			<tiles:insertAttribute name="main" />
 		</div>
 
 	</div>
-	<a href="#" onclick="test();"> Click me! </a>
 
 	<spring:url value="resources/js/main.js" var="main_js" />	
 	<script src="${main_js}" type="text/javascript"><!-- required for FF3 and Opera --></script>
-	<script src="resources/jquery/dist/jquery.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
 	<script src="resources/bootstrap/bower_components/bootstrap/dist/js/bootstrap.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
 	<script src="resources/bootstrap/bower_components/metisMenu/dist/metisMenu.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
+	 
 	<script src="resources/bootstrap/bower_components/morrisjs/morris.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
+	
 	<script src="resources/bootstrap/bower_components/raphael/raphael.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
 	<script src="resources/dist/js/sb-admin-2.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
-	<script src="resources/js/morris-data.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
-
+	
+	<script src="resources/js/morris-data.js" type="text/javascript"><!-- required for FF3 and Opera -->	</script>
+	
+	<script src="resources/js/d3.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
+  
 </body>
 </html>

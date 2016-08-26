@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Tiles page</title>
+<title>Partial page</title>
 </head>
 <body>
     Greeting : ${greeting}

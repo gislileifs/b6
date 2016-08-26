@@ -13,15 +13,19 @@ public class Recipe {
 	
 	String name;
 	String type;
-	ArrayList<String> ingredients;
-	ArrayList<String> steps;
+	String[] ingredients;
+	String[] steps;
 	String url;
 	
-	public ArrayList<String> getSteps() {
+	public String getId() {
+		return id;
+	}
+	
+	public String[] getSteps() {
 		return steps;
 	}
 
-	public void setSteps(ArrayList<String> steps) {
+	public void setSteps(String[] steps) {
 		this.steps = steps;
 	}
 
@@ -33,10 +37,6 @@ public class Recipe {
 		this.url = url;
 	}
 
-	public void setIngredients(ArrayList<String> ingredients) {
-		this.ingredients = ingredients;
-	}
-
 	public Recipe() {
 		
 	}
@@ -46,11 +46,16 @@ public class Recipe {
 	}
 	
 	public String toString() {
-		String str = "<div style='margin-bottom: 20px'>";
+		String str = "<div id='display" + id + "' style='margin-bottom: 20px'>";
 		str += "<p>Name: " + name + "</p>";
 		str += "<p>Type: " + type + "</p>";
-		str += "<a href='deleteRecipe?id=" + id + "'>Delete</a>";
+		str += "<a href='deleteRecipe?id=" + id + "'>Delete</a><p>";
+		str += "<a href='#' onclick='editRecipe(\"" + id + "\")'> Edit </a>";
+		str += "<a href='#' onclick='getRecipe(\"" + id + "\")'> GetResipe </a>";
 		str += "<a href='ajaxTest'> Test </a>";
+		str += "</div>";
+		str += "<div if='edit" + id + "'>";
+		str += "Edit fields";
 		str += "</div>";
 		return str;
 	}
@@ -67,10 +72,10 @@ public class Recipe {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public List<String> getIngredients() {
+	public String[] getIngredients() {
 		return ingredients;
 	}
-	public void setIngredients(List<String> ingredients) {
+	public void setIngredients(String[] ingredients) {
 		this.ingredients = ingredients;
 	}
 }
