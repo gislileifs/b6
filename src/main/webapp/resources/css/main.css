@@ -20,6 +20,14 @@
 
 a.md-default-theme:not(.md-button), a:not(.md-button) {
     color: #777;
+    font-size: 24px;
+}
+
+@media (max-resolution: 1dppx) {
+	a.md-default-theme:not(.md-button), a:not(.md-button) {
+	    color: #777;
+	    font-size: 17px;
+	}
 }
 
 body {
