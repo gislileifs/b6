@@ -1,0 +1,78 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form ng-cloak ng-submit="submit()">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{recipe.name}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        
+          <input type="hidden" ng-model="recipe.id" />
+          <md-input-container>
+              <input type="text" ng-model="recipe.name" md-autofocus class="form-control wide" 
+              id="recipeName" placeholder="Heiti uppskriftar" required ng-minlength="3"/>
+          </md-input-container>
+       	  <md-input-container>
+               <input type="text" ng-model="recipe.type" id="rtype" class="form-control" 
+               placeholder="Tegund"/>
+          </md-input-container>
+          
+          <md-input-container>
+              <input type="text" ng-model="ctrl.recipe.url" id="rurl" class="form-control" 
+              placeholder="Url"/>
+          </md-input-container>
+          
+          <table class="table" id="ingredientTable">
+			<caption style="fontsize: 16pt">Hráefni</caption>
+			<tr ng-repeat="ing in recipe.ingredients track by $index">
+			<td>
+			<input type="text" ng-model="recipe.ingredients[$index]" class="form-control" focus="$last" />
+			</td>
+			<td>
+			<button type="button" tabindex="-1" class="btn custom-width" ng-click="delIngredient($index)">Delete</button>
+			</td>
+			</tr>
+			<tr>
+			<td colspan="2" style="textalign: left">
+			<button type="button" class="btn" ng-click="addIngredient()">Bæta við</button>
+			</td>
+			</tr>
+			</table>
+			
+			<table class="table" id="stepsTable">
+					<caption style="fontsize: 16pt">Skref</caption>
+					<tr ng-repeat="s in recipe.steps track by $index">
+					<td>
+					<textarea ng-model="recipe.steps[$index]" class="form-control" focus="$last" />
+					</td>
+					<td>
+					<button type="button" tabindex="-1" class="btn custom-width" ng-click="deleteStep($index)">Delete</button>
+					</td>
+					</tr>
+					<tr>
+					<td colspan="2" style="textalign: left">
+					<button type="button" class="btn" ng-click="addStep()">Add Step</button>
+					</td>
+					</tr>
+					</table>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+
+      <span flex></span>
+
+      <md-button ng-click="cancel()">
+        Hætta við
+      </md-button>
+      <input type="submit"  value="{{!recipe.id ? 'Add Recipe' : 'Update Recipe'}}" class="btn btn-primary btn-sm" />
+      
+    </md-dialog-actions>
+  </form>
+</md-dialog>

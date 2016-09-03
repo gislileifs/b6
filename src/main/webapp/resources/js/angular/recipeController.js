@@ -1,11 +1,22 @@
 'use strict';
  
-app.controller('RecipeController', ['$scope', 'RecipeService', function($scope, RecipeService) {
+app.controller('RecipeController', ['$scope', '$document', 'RecipeService', '$mdDialog', function($scope, $document, RecipeService, $mdDialog) {
           var self = this;
           self.recipe={id:null,name:'',type:'', url:''};
           self.recipes=[];
           self.recipe.ingredients=[];
           self.recipe.steps=[];
+          $scope.editPanelVisible = false;
+      /*    
+          $document.bind("keypress", function(event) {
+              if( event.keyCode == 27 ) {
+            	  //alert( "bind" );
+            	  //editPanelVisible = false;
+            	  var mController = angular.element(document.getElementById("RecipeController"));
+            	  mController.scope().cancelAddRecipe();
+              }
+          });
+          */
           
           $scope.trustSrc = function(src) {
         	  return $src.trustAsResourceUrl(src);
@@ -33,13 +44,16 @@ app.controller('RecipeController', ['$scope', 'RecipeService', function($scope, 
                   );
           };
           
-          self.addRecipe = function() {
-        	  $("#editPanel").fadeIn('fast');
+          self.addRecipe = function(event) {
+        	  //$("#editPanel").fadeIn('fast');
+        	  //alert('edit');
+        	  //$scope.editPanelVisible = true;
         	  self.reset();
-        	  toggleButtons();
-        	  $("#recipeName").focus();
+        	  //toggleButtons();
+        	  //$("#recipeName").focus();
         	  //alert("xx");
-        	  setTimeout(setFocus, 50 );
+        	  //setTimeout(setFocus, 50 );
+              self.editRecipe(event, self.recipe);
           }
           
           function setFocus() {
@@ -48,7 +62,8 @@ app.controller('RecipeController', ['$scope', 'RecipeService', function($scope, 
           }
           
           self.cancelAddRecipe = function() {
-        	  $("#editPanel").fadeOut('fast');
+        	  //$("#editPanel").fadeOut('fast');
+        	  $scope.editPanelVisible = false;        	  
         	  self.reset();
         	  toggleButtons();
           } 
@@ -91,14 +106,16 @@ app.controller('RecipeController', ['$scope', 'RecipeService', function($scope, 
                   console.log('Recipe updated with id ', self.recipe.id);
               }
               self.reset();
-              toggleButtons();
-              $("#editPanel").fadeOut('fast');
+              //toggleButtons();
+              //$("#editPanel").fadeOut('fast');
           };
                
-          self.edit = function(id){
+          self.edit = function(id, event){
               console.log('id to be edited', id);
-              $("#editPanel").fadeIn('fast');
-              toggleButtons();
+              //$("#editPanel").fadeIn('fast');
+              //$scope.editPanelVisible = true;
+              
+              //toggleButtons();
               
               for(var i = 0; i < self.recipes.length; i++){
                   if(self.recipes[i].id === id) {
@@ -119,6 +136,7 @@ app.controller('RecipeController', ['$scope', 'RecipeService', function($scope, 
               self.recipe.ingredients = trimArray(self.recipe.ingredients);
               self.recipe.steps = trimArray(self.recipe.steps);
               
+              self.editRecipe(event, self.recipe);
               //self.recipe.ingredients.push("");
           };
           
@@ -178,12 +196,71 @@ app.controller('RecipeController', ['$scope', 'RecipeService', function($scope, 
           self.reset = function(){
               self.recipe={id:null,name:'',type:''};
               self.recipe.ingredients = [];
-              for( var i = 0; i < 5; i++ )
-            	  self.recipe.ingredients.push("");
+              //for( var i = 0; i < 5; i++ )
+            	//  self.recipe.ingredients.push("");
               self.recipe.steps = [];
-              for( var i = 0; i < 5; i++ )
-            	  self.recipe.steps.push("");
+              //for( var i = 0; i < 5; i++ )
+            	//  self.recipe.steps.push("");
               $scope.myForm.$setPristine(); //reset Form
           };
+          
+          self.editRecipe = function(ev, recipe) {
+        	  //alert(self.recipe.name);
+            $mdDialog.show({
+                locals:{dataToPass: self.recipe},                
+              controller: DialogController,
+             /* controllerAs: 'dialog', */
+              preserveScope: true,
+              templateUrl: 'resources/js/angular/myDialog.html',
+              parent: angular.element(document.body),
+              targetEvent: ev,
+              clickOutsideToClose:true,
+              fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+            .then(function(answer) {
+            	self.submit();
+            	//alert(answer.name);
+              $scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+              $scope.status = 'You cancelled the dialog.';
+            });
+          };
+          
+          function DialogController($scope, $mdDialog, dataToPass) {
+        	  $scope.recipe = dataToPass;
+        	  
+        	    $scope.hide = function() {
+        	      $mdDialog.hide();
+        	    };
+
+        	    $scope.cancel = function() {
+        	      $mdDialog.cancel();
+        	    };
+
+        	    $scope.answer = function(answer) {
+        	      $mdDialog.hide(answer);
+        	    };
+        	    
+        	    $scope.submit = function() {
+        	    	$mdDialog.hide($scope.recipe);
+        	    }
+                $scope.delIngredient = function(index) {
+              	  $scope.recipe.ingredients.splice(index, 1);
+                }
+                
+                $scope.addIngredient = function() {
+              	  $scope.recipe.ingredients.push("");
+                }
+                
+                $scope.addStep = function() {
+              	  $scope.recipe.steps.push("");
+                }
+                
+                $scope.deleteStep = function(index) {
+              	  $scope.recipe.steps.splice(index, 1);
+                }
+        	  }
+        	  
+        	  DialogController.$inject = ['$scope','$mdDialog','dataToPass'];
  
       }]);

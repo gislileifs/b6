@@ -3,79 +3,81 @@
 <div id="mycontent" class="panel panel-default">
 </div>
 
-<div ng-app="myApp" class="datepickerdemoBasicUsage" ng-controller="AppCtrl" ng-cloak="">
-  <md-content layout-padding="">
+<div ng-app="myApp" class="sidenavdemoBasicUsage" ng-controller="NavCtrl" layout="column" style="height:500px;" ng-cloak="">
 
-    <div layout-gt-xs="row">
-      <div flex-gt-xs="">
-        <h4>Standard date-picker</h4>
-        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
-      </div>
+  <section layout="row" flex="">
 
-      <div flex-gt-xs="">
-        <h4>Disabled date-picker</h4>
-        <md-datepicker ng-model="myDate" md-placeholder="Enter date" disabled=""></md-datepicker>
-      </div>
-    </div>
+    <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
 
-    <div layout-gt-xs="row">
-      <div flex-gt-xs="">
-        <h4>Date-picker with min date and max date</h4>
-        <md-datepicker ng-model="myDate" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
-      </div>
+      <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Sidenav Left</h1>
+      </md-toolbar>
+      <md-content layout-padding="" ng-controller="LeftCtrl">
+        <md-button ng-click="close()" class="md-primary" hide-gt-md="">
+          Close Sidenav Left
+        </md-button>
+        <p hide="" show-gt-md="">
+          This sidenav is locked open on your device. To go back to the default behavior,
+          narrow your display.
+        </p>
+      </md-content>
 
-      <div flex-gt-xs="">
-        <h4>Only weekends are selectable</h4>
-        <md-datepicker ng-model="myDate" md-placeholder="Enter date" md-date-filter="onlyWeekendsPredicate"></md-datepicker>
-      </div>
-    </div>
+    </md-sidenav>
 
-    <div layout-gt-xs="row">
-      <div flex-gt-xs="">
-        <h4>Only weekends within given range are selectable</h4>
-        <md-datepicker ng-model="myDate" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate" md-date-filter="onlyWeekendsPredicate"></md-datepicker>
-      </div>
+    <md-content flex="" layout-padding="">
 
-      <div flex-gt-xs="">
-        <h4>Opening the calendar when the input is focused</h4>
-        <md-datepicker ng-model="myDate" md-placeholder="Enter date" md-open-on-focus=""></md-datepicker>
-      </div>
-    </div>
+      <div layout="column" layout-align="top center">
+        <p>
+        The left sidenav will 'lock open' on a medium (=960px wide) device.
+        </p>
+        <p>
+        The right sidenav will focus on a specific child element.
+        </p>
 
-    <div layout-gt-xs="row">
-      <form name="myForm" flex-gt-xs="">
-        <h4>With ngMessages</h4>
-        <md-datepicker name="dateField" ng-model="myDate" md-placeholder="Enter date" required="" md-min-date="minDate" md-max-date="maxDate" md-date-filter="onlyWeekendsPredicate"></md-datepicker>
-
-        <div class="validation-messages" ng-messages="myForm.dateField.$error">
-          <div ng-message="valid">The entered value is not a date!</div>
-          <div ng-message="required">This date is required!</div>
-          <div ng-message="mindate">Date is too early!</div>
-          <div ng-message="maxdate">Date is too late!</div>
-          <div ng-message="filtered">Only weekends are allowed!</div>
+        <div>
+          <md-button ng-click="toggleLeft()" class="md-primary" hide-gt-md="">
+            Toggle left
+          </md-button>
         </div>
-      </form>
 
-      <form name="myOtherForm" flex-gt-xs="">
-        <h4>Inside a md-input-container</h4>
+        <div>
+          <md-button ng-click="toggleRight()" ng-hide="isOpenRight()" class="md-primary">
+            Toggle right
+          </md-button>
+        </div>
+      </div>
 
-        <md-input-container>
-          <label>Enter date</label>
-          <md-datepicker ng-model="myDate" name="dateField" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+      <div flex=""></div>
 
-          <div ng-messages="myOtherForm.dateField.$error">
-            <div ng-message="valid">The entered value is not a date!</div>
-            <div ng-message="required">This date is required!</div>
-            <div ng-message="mindate">Date is too early!</div>
-            <div ng-message="maxdate">Date is too late!</div>
-          </div>
-        </md-input-container>
-      </form>
-    </div>
+    </md-content>
 
-  </md-content>
+    <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+
+      <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Sidenav Right</h1>
+      </md-toolbar>
+      <md-content ng-controller="RightCtrl" layout-padding="">
+        <form>
+          <md-input-container>
+            <label for="testInput">Test input</label>
+            <input id="testInput" ng-model="data" md-autofocus="" type="text">
+          </md-input-container>
+        </form>
+        <md-button ng-click="close()" class="md-primary">
+          Close Sidenav Right
+        </md-button>
+      </md-content>
+
+    </md-sidenav>
+
+  </section>
+
 </div>
 
+<!--
+Copyright 2016 Google Inc. All Rights Reserved. 
+Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
+-->
 
 <script>
 

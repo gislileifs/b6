@@ -3,6 +3,7 @@
 
 <div ng-app="myApp" class="ng-cloak" ng-strict-di>
 
+
       <div class="generic-container" ng-controller="RecipeController as ctrl">
       
       <!--  -->
@@ -18,7 +19,7 @@
       </div>
       <div class="modal-body">       
 
-			<a ng-href="{{ctrl.recipe.url}}">Hlekkur á uppskrift</a>
+			<a ng-href="{{ctrl.recipe.url}}" target="_blank">Hlekkur á uppskrift</a>
 
 	      <div>
 	      <strong>Hráefni</strong>
@@ -46,12 +47,11 @@
     </div>
 
   </div>
-</div>
-      <!--  -->
-      
-          <div id="editPanel" class="panel panel-default" style="display:none">
+</div>      
+          <div id="editPanel" class="panel panel-default" ng-show="editPanelVisible">
               <div class="panel-heading"><span class="lead">{{!ctrl.recipe.id ? 'Ný uppskrift' : ctrl.recipe.name}}</span>
-              <button id="cancelAddRecipe" type="button" ng-click="ctrl.cancelAddRecipe()" class="btn" style="float:right; display:none">Hætta við</button>
+              <button id="cancelAddRecipe" type="button" 
+              ng-click="ctrl.cancelAddRecipe()" class="btn" style="float:right; display:none">Hætta við</button>
               </div>
               <div class="formcontainer" style="padding:10px">
 
@@ -138,7 +138,7 @@
               <div class="panel-heading">
               <span class="lead">Uppskriftir </span>
               		<div style="float:right">
-		           <button id="addRecipe" type="button" ng-click="ctrl.addRecipe()" class="btn btn-default btn-sm" >Ný uppskrift</button>
+		           <button id="addRecipe" type="button" ng-click="ctrl.addRecipe($event)" class="btn btn-default btn-sm" >Ný uppskrift</button>
               		</div>
 	              <div class=" col-lg-3 col-md-4 col-sm-6" style="float:right">
 	              <input placeholder="Filter recipes" type="text" ng-model="recipeFilter" class="form-control"/>
@@ -155,8 +155,11 @@
                           </tr>
                       </thead>
                       <tbody>
+                      <!-- ng-click="ctrl.edit(u.id)" -->
                           <tr ng-repeat="u in ctrl.recipes | filter:recipeFilter"  style="cursor: pointer">
-                          	<td ng-click="ctrl.edit(u.id)" style="padding-left: 20px">
+                          	<td 
+                          	ng-click="ctrl.edit(u.id, $event)"
+                          	style="padding-left: 20px">
                           		<i class="fa fa-pencil"></i>
                           	</td>
                               <td ng-click="ctrl.display(u.id)"><span ng-bind="u.name"></span></td>
@@ -174,7 +177,8 @@
       <script src="<c:url value='resources/js/angular/recipeService.js' />"></script>
       <script src="<c:url value='resources/js/angular/recipeController.js' />"></script>
   </div>
-  <div id="errorDiv"></div>
+  <div id="errorDiv">
+  </div>
   
   <script>
 
