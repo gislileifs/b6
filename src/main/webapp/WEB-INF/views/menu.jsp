@@ -86,6 +86,11 @@
                             
                             <!-- /.nav-second-level -->
                         </li>
+                        <li>
+                            <a href="ang"><i class="fa fa-wrench fa-fw"></i>Angular</a>
+                            
+                            <!-- /.nav-second-level -->
+                        </li>
                       
                     </ul>
                 </div>

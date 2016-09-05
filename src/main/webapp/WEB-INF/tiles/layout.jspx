@@ -30,6 +30,10 @@ xmlns:jsp="http://java.sun.com/JSP/Page">
   <script src="resources/js/angular/dist/angular-material.js"><!--xx--></script>
   <script src="resources/js/moment.js"><!--xx--></script>      
       <script src="resources/js/angular/app.js"><!--xx--></script>      
+      <script src="resources/js/angular/recipeService.js"><!--xx--></script>
+      <script src="resources/js/angular/recipeController.js"><!--xx--></script>
+      <script src="resources/js/angular/wineService.js"><!--xx--></script>
+      <script src="resources/js/angular/wineController.js"><!--xx--></script>
 
 </head>
 <body my-document-click=''>

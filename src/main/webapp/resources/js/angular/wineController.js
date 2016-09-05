@@ -1,6 +1,6 @@
 'use strict';
  
-app.controller('WineController', ['$scope', 'WineService', function($scope, WineService) {
+app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function($scope, WineService, $mdDialog) {
           var self = this;
           self.wineLogEntry={id:null,name:'',type:''};
           self.wineLog=[];
@@ -31,13 +31,9 @@ app.controller('WineController', ['$scope', 'WineService', function($scope, Wine
                   );
           };
           
-          self.addLogEntry = function() {
-        	  $("#editPanel").fadeIn('fast');
+          self.addLogEntry = function(event) {
         	  self.reset();
-        	  toggleButtons();
-        	  $("#wineName").focus();
-        	  //alert("xx");
-        	  setTimeout(setFocus, 50 );
+        	  self.editWineLogEntry(event);
           }
           
           function setFocus() {
@@ -45,19 +41,12 @@ app.controller('WineController', ['$scope', 'WineService', function($scope, Wine
         	  //alert("setFocus");
           }
           
-          self.cancelAddLogEntry = function() {
-        	  $("#editPanel").fadeOut('fast');
-        	  self.reset();
-        	  toggleButtons();
-          } 
-          
           var toggleButtons = function() {
         	  $("#addWine").toggle();
         	  $("#cancelAddWine").toggle();        	  
           }
  
          self.updateWineLogEntry = function(entry, id){
-        	 //alert("Date: " + entry.date);
               WineService.updateLogEntry(entry, id)
                       .then(
                               self.fetchWineLog, 
@@ -94,10 +83,10 @@ app.controller('WineController', ['$scope', 'WineService', function($scope, Wine
               $("#editPanel").fadeOut('fast');
           };
                
-          self.edit = function(id){
+          self.edit = function(event, id){
               console.log('id to be edited', id);
-              $("#editPanel").fadeIn('fast');
-              toggleButtons();
+              //$("#editPanel").fadeIn('fast');
+              //toggleButtons();
               
               for(var i = 0; i < self.wineLog.length; i++){
                   if(self.wineLog[i].id === id) {
@@ -114,13 +103,103 @@ app.controller('WineController', ['$scope', 'WineService', function($scope, Wine
            
               self.wineLogEntry.steps = trimArray(self.wineLogEntry.steps);
               $scope.myDate = new Date(self.wineLogEntry.date);
+              self.wineLogEntry.date = new Date(self.wineLogEntry.date);
               for( var i = 0; i < self.wineLogEntry.steps.length; i++ ) {
             	  self.wineLogEntry.steps[i].date = new Date(self.wineLogEntry.steps[i].date);
             	  //alert(self.wineLogEntry.steps[i].date);
               }
               
               //self.recipe.ingredients.push("");
+              self.editWineLogEntry( event );
           };
+          
+          self.editWineLogEntry = function(ev) {
+        	  //alert(self.recipe.name);
+            $mdDialog.show({
+                locals:{dataToPass: self.wineLogEntry},                
+              controller: DialogController,
+             /* controllerAs: 'dialog', */
+              preserveScope: true,
+              templateUrl: 'resources/js/angular/winelogEdit.html',
+              parent: angular.element(document.body),
+              targetEvent: ev,
+              clickOutsideToClose:true,
+              fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+            .then(function(answer) {
+            	self.submit();
+            	//alert(answer.name);
+              $scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+              $scope.status = 'You cancelled the dialog.';
+            });
+          };
+          
+          self.displayWineLogEntry = function(ev) {
+        	  //alert(self.recipe.name);
+            $mdDialog.show({
+                locals:{dataToPass: self.wineLogEntry},                
+              controller: DialogController,
+             /* controllerAs: 'dialog', */
+              preserveScope: true,
+              templateUrl: 'resources/js/angular/winelogDisplay.html',
+              parent: angular.element(document.body),
+              targetEvent: ev,
+              clickOutsideToClose:true,
+              fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+            .then(function(answer) {
+            	self.remove(answer);
+            	//alert(answer.name);
+              $scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+              $scope.status = 'You cancelled the dialog.';
+            });
+          };
+          
+          function DialogController($scope, $mdDialog, dataToPass) {
+        	  $scope.wineLogEntry = dataToPass;
+        	  $scope.showRemove = false;
+        	  
+        	    $scope.hide = function() {
+        	      $mdDialog.hide();
+        	    };
+
+        	    $scope.cancel = function() {
+        	      $mdDialog.cancel();
+        	    };
+
+        	    $scope.answer = function(answer) {
+        	      $mdDialog.hide(answer);
+        	    };
+        	    
+        	    $scope.submit = function() {
+        	    	$mdDialog.hide($scope.recipe);
+        	    }
+                
+                $scope.addStep = function() {
+              	  $scope.wineLogEntry.steps.push("");
+                }
+                
+                $scope.deleteStep = function(index) {
+              	  $scope.wineLogEntry.steps.splice(index, 1);
+                }
+                
+                $scope.prepareRemoval = function() {
+                	$scope.showRemove = true;
+                }
+                
+                $scope.removeWineLogEntry = function(id) {
+                	$mdDialog.hide(id);
+        	  	}
+                
+                $scope.alcohol = function() {
+              	  var a = ($scope.wineLogEntry.initialGravity - $scope.wineLogEntry.finalGravity) / 7.5;
+              	  return Math.round( a * 10 ) / 10;
+                }
+          	}
+        	  DialogController.$inject = ['$scope','$mdDialog','dataToPass'];
+ 
           
           var trimArray = function(array) {
         	  for (var i = 0; i < array.length; i++) {
@@ -132,7 +211,7 @@ app.controller('WineController', ['$scope', 'WineService', function($scope, Wine
         	  return array;
           }
           
-          self.display = function(id){
+          self.display = function(event,id){
               
               for(var i = 0; i < self.wineLog.length; i++){
                   if(self.wineLog[i].id === id) {
@@ -144,7 +223,8 @@ app.controller('WineController', ['$scope', 'WineService', function($scope, Wine
             	  self.wineLogEntry.steps[i].date = new Date(self.wineLogEntry.steps[i].date);
               }
              
-        	  $('#myModal').modal('show');
+        	  //$('#myModal').modal('show');
+              self.displayWineLogEntry(event);
           };
           
           var createStep = function() {
@@ -174,14 +254,11 @@ app.controller('WineController', ['$scope', 'WineService', function($scope, Wine
           }
                
           self.remove = function(id){
-        	  if( confirm( "Are you sure?" ) ) {
-	              console.log('id to be deleted', id);
-	              if(self.wineLogEntry.id === id) {//clean form if the recipe to be deleted is shown there.
-	                 self.reset();
-	              }
-	              self.deleteWineLogEntry(id);
-	              $("#myModal").modal('hide');
-        	  }
+              console.log('id to be deleted', id);
+              if(self.wineLogEntry.id === id) {//clean form if the recipe to be deleted is shown there.
+                 self.reset();
+              }
+              self.deleteWineLogEntry(id);
           };
  
            

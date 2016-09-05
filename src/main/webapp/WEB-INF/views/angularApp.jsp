@@ -1,39 +1,65 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<!-- meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" -->
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<spring:url value="/css" var="styleUrl" />
+	<link href="resources/bootstrap/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+	<link href="resources/bootstrap/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+	<link href="resources/css/angular-material.min.css" rel="stylesheet"/>
+	<link href="resources/css/main.css" rel="stylesheet"/>
+	 
+	<script src="resources/jquery/dist/jquery.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
+	
+        <script src="resources/js/angular/dist/angular.js"><!--xx--></script>
+	  <script src="resources/js/angular/dist/angular-animate.js"><!--xx--></script>
+  <script src="resources/js/angular/dist/angular-aria.js"><!--xx--></script>
+  <script src="resources/js/angular/dist/angular-messages.js"><!--xx--></script>
+  <script src="resources/js/angular/dist/svg-assets-cache.js"><!--xx--></script>
+  <script src="resources/js/angular/dist/angular-material.js"><!--xx--></script>
+  <script src="resources/js/moment.js"><!--xx--></script>      
+      <script src="resources/js/angular/app.js"><!--xx--></script>      
+      <script src="resources/js/angular/recipeService.js"><!--xx--></script>
+      <script src="resources/js/angular/recipeController.js"><!--xx--></script>
+      <script src="resources/js/angular/wineService.js"><!--xx--></script>
+      <script src="resources/js/angular/wineController.js"><!--xx--></script>
+
+</head>
+<body my-document-click='' class="angularAppBody">
 
 <div id="mycontent" class="panel panel-default">
 </div>
 
-<div ng-app="myApp" class="sidenavdemoBasicUsage" ng-controller="NavCtrl" layout="column" style="height:500px;" ng-cloak="">
+<div ng-app="myApp" class="sidenavdemoBasicUsage" ng-controller="NavCtrl" layout="column"  ng-cloak="">
 
-  <section layout="row" flex="">
+  <section layout="row" flex layout-fill>
 
     <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
 
       <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Sidenav Left</h1>
+        <h1 class="md-toolbar-tools"></h1>
       </md-toolbar>
       
       <md-content layout-padding="" ng-controller="LeftCtrl">
-      Hér kemur einhver texti sem kannski birtist.
-        <md-button ng-click="close()" class="md-primary" hide-gt-md="">
+      <div layout="column">
+        <md-button ng-click="close()" class="md-primary row" hide-gt-md="">
           Close Sidenav Left
-        </md-button>
+        </md-button class="row">
         <md-button ng-click="showRecipes()">
         	Uppskriftir
-        </md-button>
+        </md-button class="navButton">
         <md-button ng-click="showWinelog()" >
         	Víngerðardagbók
-        </md-button>   
-        <md-button>
+        </md-button class="row">   
+        <a class="md-button" href="javascript:formSubmit()">
          Skrá út: ${pageContext.request.userPrincipal.name}
-         </md-button>
-         <md-button>
-         More stuff
-         </md-button>     
+         </a>
         <p hide="" show-gt-md="">
           This sidenav is locked open on your device. To go back to the default behavior,
           narrow your display.
         </p>
+        </div>
       </md-content>
 
     </md-sidenav>
@@ -91,14 +117,25 @@
     </md-sidenav>
 
   </section>
+<form action="logout" method="post" id="logoutForm">
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+	</form>
 
 </div>
+</body>
+</html>
 
 <!--
 Copyright 2016 Google Inc. All Rights Reserved. 
 Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
 -->
 <script>
+
+function formSubmit() {
+	document.getElementById("logoutForm").submit();
+}
+
 
 $(function(){
 	//alert( "x" );
@@ -137,36 +174,6 @@ function ajaxTest() {
 
 }
 
-function partialView() {
-
-	var base = "${pageContext.request.contextPath}";
-	$.get( base + "/partialViewTest", {param: "myval", other: "otherVal"}, function(data) {
-		$("#ajaxOutput").html(data);
-		});
-/*
-	$.ajax({
-		type : "GET",
-		contentType : "application/json",
-		url : base + "/partialViewTest",
-		data : {param: "theValue"},
-		//dataType : 'json',
-		timeout : 100000,
-		success : function(data) {
-//			alert( JSON.stringify(data) );
-			$("#ajaxOutput").html(data);
-		},
-		error : function(e) {
-			alert("error");
-			alert( JSON.stringify(e) );
-			$("#errordiv").html(JSON.stringify(e));
-		},
-		done : function(e) {
-			//console.log("DONE");
-			//enableSearchButton(true);
-		}
-	});
-*/
-}
 
 
 </script>

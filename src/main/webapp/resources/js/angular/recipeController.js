@@ -150,7 +150,7 @@ app.controller('RecipeController', ['$scope', '$document', 'RecipeService', '$md
         	  return array;
           }
           
-          self.display = function(id){
+          self.display = function(event, id){
               
               for(var i = 0; i < self.recipes.length; i++){
                   if(self.recipes[i].id === id) {
@@ -159,9 +159,10 @@ app.controller('RecipeController', ['$scope', '$document', 'RecipeService', '$md
                   }
               }
              
-        	  $('#myModal').modal('show');
+        	  //$('#myModal').modal('show');
+              self.displayRecipe( event, self.recipe );
           };
-          
+          /*
           self.delIngredient = function(index) {
         	  self.recipe.ingredients.splice(index, 1);
           }
@@ -180,16 +181,15 @@ app.controller('RecipeController', ['$scope', '$document', 'RecipeService', '$md
           self.deleteStep = function(index) {
         	  self.recipe.steps.splice(index, 1);
           }
+          */
                
           self.remove = function(id){
-        	  if( confirm( "Are you sure?" ) ) {
-	              console.log('id to be deleted', id);
-	              if(self.recipe.id === id) {//clean form if the recipe to be deleted is shown there.
-	                 self.reset();
-	              }
-	              self.deleteRecipe(id);
-	              $('#myModal').modal('hide');
-        	  }
+              console.log('id to be deleted', id);
+              if(self.recipe.id === id) {//clean form if the recipe to be deleted is shown there.
+                 self.reset();
+              }
+              self.deleteRecipe(id);
+              //$('#myModal').modal('hide');
           };
  
            
@@ -201,7 +201,7 @@ app.controller('RecipeController', ['$scope', '$document', 'RecipeService', '$md
               self.recipe.steps = [];
               //for( var i = 0; i < 5; i++ )
             	//  self.recipe.steps.push("");
-              $scope.myForm.$setPristine(); //reset Form
+              //$scope.recipeForm.$setPristine(); //reset Form
           };
           
           self.editRecipe = function(ev, recipe) {
@@ -211,7 +211,7 @@ app.controller('RecipeController', ['$scope', '$document', 'RecipeService', '$md
               controller: DialogController,
              /* controllerAs: 'dialog', */
               preserveScope: true,
-              templateUrl: 'resources/js/angular/myDialog.html',
+              templateUrl: 'resources/js/angular/recipeEdit.html',
               parent: angular.element(document.body),
               targetEvent: ev,
               clickOutsideToClose:true,
@@ -226,8 +226,32 @@ app.controller('RecipeController', ['$scope', '$document', 'RecipeService', '$md
             });
           };
           
+          self.displayRecipe = function(ev, recipe) {
+        	  //alert(self.recipe.name);
+            $mdDialog.show({
+                locals:{dataToPass: self.recipe},                
+              controller: DialogController,
+             /* controllerAs: 'dialog', */
+              preserveScope: true,
+              templateUrl: 'resources/js/angular/recipeDisplay.html',
+              parent: angular.element(document.body),
+              targetEvent: ev,
+              clickOutsideToClose:true,
+              fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+            .then(function(answer) {
+            	//self.submit();
+            	//alert(answer.name);
+            	self.remove(answer); //Remove the recipe
+              $scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+              $scope.status = 'You cancelled the dialog.';
+            });
+          };
+          
           function DialogController($scope, $mdDialog, dataToPass) {
         	  $scope.recipe = dataToPass;
+        	  $scope.showRemove = false;
         	  
         	    $scope.hide = function() {
         	      $mdDialog.hide();
@@ -259,8 +283,15 @@ app.controller('RecipeController', ['$scope', '$document', 'RecipeService', '$md
                 $scope.deleteStep = function(index) {
               	  $scope.recipe.steps.splice(index, 1);
                 }
-        	  }
-        	  
+                
+                $scope.prepareRemoval = function() {
+                	$scope.showRemove = true;
+                }
+                
+                $scope.removeRecipe = function(id) {
+                	$mdDialog.hide(id);
+        	  	}
+          	}
         	  DialogController.$inject = ['$scope','$mdDialog','dataToPass'];
  
       }]);

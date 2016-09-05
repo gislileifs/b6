@@ -1,0 +1,75 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form id="winelogForm" ng-cloak ng-submit="submit()">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{wineLogEntry.name}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+          <input type="hidden" ng-model="recipe.id" />
+              <div style="margin-bottom: 20px">
+		        <md-datepicker md-autofocus ng-model="wineLogEntry.date" id="rdate" md-placeholder="Enter date"></md-datepicker>
+			  </div>
+          <md-input-container>
+              <input type="text" ng-model="wineLogEntry.name" class="form-control wide" 
+              id="wineName" placeholder="Heiti víns" required ng-minlength="3"/>
+              <div class="has-error" ng-show="wineLofForm.$dirty">
+                                      <span ng-show="wineLogForm.wineName.$error.required">This is a required field</span>
+                                      <span ng-show="wineLogForm.wineName.$error.minlength">Minimum length required is 3</span>
+              </div>
+          </md-input-container>
+       	  <md-input-container>
+               <input type="text" ng-model="wineLogEntry.type" id="rtype" class="form-control" 
+               placeholder="Tegund"/>
+          </md-input-container>
+         
+			  
+			<md-input-container>
+               <input type="text" ng-model="wineLogEntry.initialGravity" id="rinitialGravity" 
+               ng-pattern="/^\d{0,9}(\.\d{1,9})?$/"
+               class="form-control input-sm" placeholder="Enter gravity"/>
+			</md-input-container>
+			<md-input-container>
+               <input type="number" ng-model="wineLogEntry.finalGravity" id="rfinalGravity" 
+               ng-pattern="/^\d{0,9}(\.\d{1,9})?$/"
+               class="form-control input-sm" placeholder="Enter gravity"/>
+			</md-input-container>
+			
+			<table class="table" id="stepsTable">
+					<caption style="fontsize: 16pt">Skref</caption>
+					<tr ng-repeat="s in wineLogEntry.steps track by $index">
+					<td>
+					<md-datepicker ng-model="wineLogEntry.steps[$index].date" md-placeholder="Enter date"></md-datepicker>											
+					<textarea ng-model="wineLogEntry.steps[$index].text" class="form-control" focus="$last" />
+					</td>
+					<td>
+					<button type="button" tabindex="-1" class="btn custom-width" ng-click="deleteStep($index)">Delete</button>
+					</td>
+					</tr>
+					<tr>
+					<td colspan="2" style="textalign: left">
+					<button type="button" class="btn" ng-click="addStep()">Add Step</button>
+					</td>
+					</tr>
+					</table>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+
+      <span flex></span>
+
+      <md-button ng-click="cancel()">
+        Hætta við
+      </md-button>
+      <input type="submit"  value="{{!recipe.id ? 'Add Recipe' : 'Update Recipe'}}" class="btn btn-primary btn-sm" />
+      
+    </md-dialog-actions>
+  </form>
+</md-dialog>

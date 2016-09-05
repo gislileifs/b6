@@ -98,8 +98,30 @@ app.controller('AppCtrl', ['$scope', function($scope) {
 	
 	
 app.controller('NavCtrl', ['$scope', '$timeout', '$mdSidenav', '$log', function ($scope, $timeout, $mdSidenav, $log) {
+	  $scope.recipesDisplayed = false;
+	  $scope.winelogDisplayed = true;
+	  $scope.template = "resources/js/angular/recipes.jsp";
+
 	    $scope.toggleLeft = buildDelayedToggler('left');
 	    $scope.toggleRight = buildToggler('right');
+	    
+		  $scope.showRecipes = function() {
+			  //alert( "R: " + $scope.recipesDisplayed + ", W: " + $scope.winelogDisplayed );
+			  $scope.winelogDisplayed = false;
+			  $scope.recipesDisplayed = true;
+			  $scope.template = "resources/js/angular/recipes.jsp";
+		      $mdSidenav('left').close()
+		  }
+
+		  $scope.showWinelog = function() {
+			  //alert( "R: " + $scope.recipesDisplayed + ", W: " + $scope.winelogDisplayed );
+
+			  $scope.recipesDisplayed = false;
+			  $scope.winelogDisplayed = true;
+			  $scope.template = "resources/js/angular/winelog.jsp";
+		      $mdSidenav('left').close()
+		  }
+	    
 	    $scope.isOpenRight = function(){
 	      return $mdSidenav('right').isOpen();
 	    };
@@ -149,6 +171,7 @@ app.controller('NavCtrl', ['$scope', '$timeout', '$mdSidenav', '$log', function 
 	    }
 	  }])
 	  .controller('LeftCtrl', ['$scope', '$timeout', '$mdSidenav', '$log', function ($scope, $timeout, $mdSidenav, $log) {
+		  		  
 	    $scope.close = function () {
 	      // Component lookup should always be available since we are not using `ng-if`
 	      $mdSidenav('left').close()

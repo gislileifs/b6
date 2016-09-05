@@ -3,64 +3,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div ng-app="myApp" class="ng-cloak" ng-strict-di
+<div class="ng-cloak" ng-strict-di
 	ng-controller="AppCtrl">
 
-      <div class="generic-container" ng-controller="WineController as ctrl">
-      
-      <!--  -->
-      <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog" tabindex="-1">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><span ng-bind="ctrl.wineLogEntry.name"></span></h4>
-      </div>
-      <div class="modal-body">     
-      		<table class="table">
-      			<tr>
-      				<th> Flotvog fyrir </th>
-      				<td style="text-align: right"><span ng-bind="ctrl.wineLogEntry.initialGravity"></span></td>
-      			</tr>
-      			<tr>
-      				<th> Flotvog eftir </th>
-      				<td style="text-align: right"><span ng-bind="ctrl.wineLogEntry.finalGravity"></span></td>
-      			</tr>
-      			<tr>
-      				<th> Alkóhól </th>
-      				<td style="text-align: right"><span>{{ctrl.alcohol()}}%</span></td>
-      			</tr>
-      			<tr>
-      				<th> Sykur í eftirsætu </th>
-      				<td style="text-align: right"><span>{{ctrl.wineLogEntry.sugar}}g</span></td>
-      			</tr>
-      		</table>
-      	<div class="row">
-      	</div>  
-	      <div>
-	      <strong>Skref</strong>
-	      	<ol id="steplist">
-	      	<li ng-repeat="k in ctrl.wineLogEntry.steps track by $index" set-focus='$last' id="{{'step' + $index}}">
-	      	<span ng-bind="ctrl.wineLogEntry.steps[$index].date | date:'d.M.yyyy'"></span>
-	      	<br>
-	      	{{k.text}}
-	      	</li>
-	      </ol>
-	      </div>
-      </div>
-      
-      <div class="modal-footer">
-        <button type="button" ng-click="ctrl.remove( ctrl.wineLogEntry.id )" class="btn" style="float:left">Eyða víni</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-      <!--  -->
+      <div class="generic-container" ng-controller="WineController as ctrl">      
       
           <div id="editPanel" class="panel panel-default" style="display:none">
               <div class="panel-heading"><span class="lead"> {{ctrl.wineLogEntry.id ? ctrl.wineLogEntry.name : 'Nýtt vín'}} </span>
@@ -165,9 +111,9 @@
               <div class="panel-heading">
               <span class="lead">Víngerðardagbók </span>
 	              <div style="float:right">
-			       <button id="addWine" type="button" ng-click="ctrl.addLogEntry()" class="btn btn-sm btn-default" >Nýtt vín</button>
+			       <button id="addWine" type="button" ng-click="ctrl.addLogEntry($event)" class="btn btn-sm btn-default" >Nýtt vín</button>
 	              </div>
-	              <div class=" col-lg-3 col-md-4 col-sm-6" style="float:right">
+	              <div class=" col-lg-3 col-md-4 col-sm-6 col-xs-5" style="float:right">
 	              <input placeholder="Filter wines" type="text" ng-model="wineFilter" class="form-control"/>
 	              </div>
               </div>
@@ -187,12 +133,12 @@
                       </thead>
                       <tbody>
                           <tr ng-repeat="u in ctrl.wineLog | filter:wineFilter"  style="cursor: pointer">
-                          	<td ng-click="ctrl.edit(u.id)" style="padding-left: 20px">
+                          	<td ng-click="ctrl.edit($event, u.id)" style="padding-left: 20px">
                           		<i class="fa fa-pencil"></i>
                           	</td>
-                              <td ng-click="ctrl.display(u.id)"><span ng-bind="u.name"></span></td>
-                              <td ng-click="ctrl.display(u.id)"><span ng-bind="u.type"></span></td>
-                              <td ng-click="ctrl.display(u.id)"><span ng-bind="u.date | date:'d.M.yyyy'"></span></td>
+                              <td ng-click="ctrl.display($event, u.id)"><span ng-bind="u.name"></span></td>
+                              <td ng-click="ctrl.display($event, u.id)"><span ng-bind="u.type"></span></td>
+                              <td ng-click="ctrl.display($event, u.id)"><span ng-bind="u.date | date:'d.M.yyyy'"></span></td>
                               <td class="hideInPortrait" ng-click="ctrl.display(u.id)"><span ng-bind="u.initialGravity"></span></td>
                               <td class="hideInPortrait" ng-click="ctrl.display(u.id)"><span ng-bind="u.finalGravity"></span></td>
                               <td class="hideInPortrait" ng-click="ctrl.display(u.id)"><span ng-bind="u.sugar"></span>g</td>
@@ -206,9 +152,6 @@
   </div>
   <div id="errorDiv" class="panel panel-default"></div>
 
-      <script src="<c:url value='resources/js/angular/app.js' />"></script>
-      <script src="<c:url value='resources/js/angular/wineService.js' />"></script>
-      <script src="<c:url value='resources/js/angular/wineController.js' />"></script>
   
   <script>
 

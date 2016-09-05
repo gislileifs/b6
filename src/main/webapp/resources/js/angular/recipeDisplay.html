@@ -1,0 +1,45 @@
+<md-dialog aria-label="Mango (Fruit)">
+
+<div id="recipeDisplay" >
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <md-button type="button" class="close" ng-click="cancel()">&times;</md-button>
+        <h4 class="modal-title"><span ng-bind="recipe.name"></span></h4>
+      </div>
+      <div class="modal-body">       
+
+			<a ng-href="{{recipe.url}}" target="_blank">Hlekkur á uppskrift</a>
+
+	      <div ng-show="recipe.ingredients.length > 0">
+	      <strong>Hráefni</strong>
+	      <ul>
+	      	<li ng-repeat="i in recipe.ingredients track by $index" >
+	      	{{i}}
+	      	</li>
+	      </ul>
+	      </div>
+	      <div ng-show="recipe.steps.length > 0">
+	      <strong>Skref</strong>
+	      	<ol id="steplist">
+	      	<li ng-repeat="k in recipe.steps track by $index" set-focus='$last' id="{{'step' + $index}}">
+	      	{{k}}
+	      	</li>
+	      </ol>
+	      </div>
+
+      </div>
+      
+      <div class="modal-footer">
+        <md-button type="button" class="btn btn-default" style="float:left" ng-click="prepareRemoval()">Eyða uppskrift</md-button>
+        <md-button ng-show="showRemove" type="button" class="btn btn-default" style="float:left" ng-click="removeRecipe( recipe.id )">Eyða í alvöru</md-button>
+        <md-button type="button" class="btn btn-default" ng-click="cancel()">Close</md-button>
+      </div>
+    </div>
+
+  </div>
+</div>      
+
+</md-dialog>

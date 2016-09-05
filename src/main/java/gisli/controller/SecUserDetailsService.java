@@ -27,7 +27,10 @@ public class SecUserDetailsService implements UserDetailsService{
           I have used userRepository*/
     	Set<UserRole> role = new HashSet<UserRole>();
     	role.add( new UserRole( 0, "ROLE_ADMIN") );
-        User user = new User( "gisli", "gisli.123", true, role );
+        
+    	//User user = new User( "gisli", "gisli.123", true, role );
+        User user = new User( username, username + ".123", true, role );
+        
         if(user == null){
             throw new UsernameNotFoundException(username);
         }else{

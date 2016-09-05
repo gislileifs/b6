@@ -29,7 +29,7 @@ public class TilesController {
     @RequestMapping(method = RequestMethod.GET)
     public String sayHello(ModelMap model) {
         model.addAttribute("greeting", "Tiles! Spring 4 MVC");
-        return "tiles/page1";
+        return "angularApp";
     }
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
@@ -63,6 +63,11 @@ public class TilesController {
         return "tiles/winerecipes";
     }    
 
+    @RequestMapping(value = "/ang", method = RequestMethod.GET)
+    public String angularApp(ModelMap model) {
+        return "angularApp";
+    }    
+    
     @RequestMapping(value = "/todo", method = RequestMethod.GET)
     public String toDo(ModelMap model) {
         return "tiles/todo";

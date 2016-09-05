@@ -1,5 +1,5 @@
 <md-dialog aria-label="Mango (Fruit)">
-  <form ng-cloak ng-submit="submit()">
+  <form id="recipeForm" ng-cloak ng-submit="submit()">
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h2>{{recipe.name}}</h2>
@@ -24,7 +24,7 @@
           </md-input-container>
           
           <md-input-container>
-              <input type="text" ng-model="ctrl.recipe.url" id="rurl" class="form-control" 
+              <input type="text" ng-model="recipe.url" id="rurl" class="form-control" 
               placeholder="Url"/>
           </md-input-container>
           

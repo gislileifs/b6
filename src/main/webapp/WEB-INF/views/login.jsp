@@ -47,7 +47,7 @@
 	<link href="resources/dist/css/timeline.css" rel="stylesheet"/>
 	<script src="resources/jquery/dist/jquery.js" type="text/javascript"><!-- required for FF3 and Opera --></script>	
 </head>
-<body onload='document.loginForm.username.focus();' style="background-color: #dddddd">
+<body onload='document.loginForm.username.focus();' class="angularAppBody">
 
 	<div class="container" id="login-boxy">
 		<div class="row">

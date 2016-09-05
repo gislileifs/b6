@@ -1,0 +1,53 @@
+<md-dialog>
+<div id="myModal">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><span ng-bind="wineLogEntry.name"></span></h4>
+      </div>
+      <div class="modal-body">     
+      		<table class="table">
+      			<tr>
+      				<th> Flotvog fyrir </th>
+      				<td style="text-align: right"><span ng-bind="wineLogEntry.initialGravity"></span></td>
+      			</tr>
+      			<tr>
+      				<th> Flotvog eftir </th>
+      				<td style="text-align: right"><span ng-bind="wineLogEntry.finalGravity"></span></td>
+      			</tr>
+      			<tr>
+      				<th> Alkóhól </th>
+      				<td style="text-align: right"><span>{{alcohol()}}%</span></td>
+      			</tr>
+      			<tr>
+      				<th> Sykur í eftirsætu </th>
+      				<td style="text-align: right"><span>{{wineLogEntry.sugar}}g</span></td>
+      			</tr>
+      		</table>
+      	<div class="row">
+      	</div>  
+	      <div>
+	      <strong>Skref</strong>
+	      	<ol id="steplist">
+	      	<li ng-repeat="k in wineLogEntry.steps track by $index" set-focus='$last' id="{{'step' + $index}}">
+	      	<span ng-bind="wineLogEntry.steps[$index].date | date:'d.M.yyyy'"></span>
+	      	<br>
+	      	{{k.text}}
+	      	</li>
+	      </ol>
+	      </div>
+      </div>
+      
+      <div class="modal-footer">
+        <md-button type="button" ng-click="prepareRemoval()" class="btn" style="float:left">Eyða víni</md-button>
+        <md-button type="button" ng-show="showRemove" ng-click="removeWineLogEntry( wineLogEntry.id )" class="btn" style="float:left">Eyða í alvöru</md-button>
+        <md-button type="button" class="btn btn-default" data-dismiss="modal">Close</md-button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</md-dialog>

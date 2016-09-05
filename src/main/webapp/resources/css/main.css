@@ -83,3 +83,20 @@ md-input-container {
 .wide {
 	width: 400px;
 }
+
+/** Side nav **/
+ .md-button {    
+    text-transform: none !important;/*For Lower case use lowercase*/
+}
+
+/** Angular App **/
+body.angularAppBody {
+	background-image: url("/images/background1.jpg");
+}
+
+.navButtonx {
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+	border: 1px solid;
+}
