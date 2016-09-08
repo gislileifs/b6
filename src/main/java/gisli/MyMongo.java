@@ -32,6 +32,11 @@ public class MyMongo {
 
 	ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoConfig.class);
 	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
+	String username;
+	
+	public void setUsername( String name ) {
+		username = name;
+	}
 
 	public String test() {
 	  try{
@@ -106,8 +111,10 @@ public class MyMongo {
 		return wineLog  ;
 	}
 	
-	public List<Recipe> getAllRecipesAsList() {
-		List<Recipe> recipes = mongoOperation.findAll(Recipe.class);
+	public List<Recipe> getAllRecipesAsList(String username) {
+		Query q = new Query();
+		q.addCriteria( Criteria.where("username").is(username));
+		List<Recipe> recipes = mongoOperation.find(q, Recipe.class);
 		return recipes;
 	}
 	

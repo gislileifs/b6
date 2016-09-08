@@ -16,7 +16,7 @@ public interface RecipeService {
      
     void deleteRecipeById(String id);
  
-    List<Recipe> findAllRecipes(); 
+    List<Recipe> findAllRecipes(String username); 
      
     void deleteAllRecipes();
      

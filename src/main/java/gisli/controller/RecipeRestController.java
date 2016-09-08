@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
- 
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import gisli.model.Recipe;
 import gisli.service.RecipeService;
   
@@ -28,7 +31,8 @@ public class RecipeRestController {
       
     @RequestMapping(value = "/recipe/", method = RequestMethod.GET)
     public ResponseEntity<List<Recipe>> listAllRecipes() {
-        List<Recipe> recipes = recipeService.findAllRecipes();
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    	List<Recipe> recipes = recipeService.findAllRecipes(auth.getName());
         if(recipes.isEmpty()){
             return new ResponseEntity<List<Recipe>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
         }

@@ -7,6 +7,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import gisli.MyMongo;
 import gisli.model.Recipe;
@@ -21,9 +23,9 @@ public class RecipeServiceImpl implements RecipeService{
      
 //    private static List<Recipe> recipes;
  
-    public List<Recipe> findAllRecipes() {
+    public List<Recipe> findAllRecipes(String username) {
     	//System.out.println( "findAllRecipes!" );
-        return mongo.getAllRecipesAsList();
+        return mongo.getAllRecipesAsList(username);
     }
      
     public Recipe findById(String id) {
@@ -38,12 +40,17 @@ public class RecipeServiceImpl implements RecipeService{
      
     public void saveRecipe(Recipe recipe) {
     	System.out.println("saveRecipe. steps: " + recipe.getSteps() );
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    	recipe.setUsername(auth.getName());
     	mongo.insert(recipe);;
     }
  
     public void updateRecipe(Recipe recipe) {
     	System.out.println("updateRecipe. Name: " + recipe.getName() + " steps: " + recipe.getSteps() );
     	String[] ing = recipe.getIngredients();
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    	recipe.setUsername(auth.getName());
+
     	if( ing != null ) {
     		for( String s : ing )
     			System.out.println( "Ing: " + s + "\n");
