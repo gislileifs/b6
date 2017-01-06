@@ -5,8 +5,14 @@
       
           <div class="panel panel-default">
                 <!-- Default panel contents -->
-              <div class="panel-heading">
-              <span class="lead">Uppskriftir </span>
+              <div class="panel-heading" style="vertical-align: middle">
+         <md-button ng-click="toggleLeft()" class="md-primary" style="margin:0px; padding-right: 10px" hide-gt-md="">
+        <i class="material-icons">view_headline</i>    
+        </md-button>              
+
+              <span class="lead" style="vertical-align: top; padding-top: 10px">
+        Uppskriftir 
+              </span>
               		<div style="float:right">
 		           <button id="addRecipe" type="button" ng-click="ctrl.addRecipe($event)" class="btn btn-default btn-sm" >Ný uppskrift</button>
               		</div>

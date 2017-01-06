@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import gisli.model.Recipe;
 import gisli.model.WineLogEntry;
 import gisli.service.WineService;
@@ -28,8 +31,10 @@ public class WineRestController {
     //-------------------Retrieve All Users--------------------------------------------------------
       
     @RequestMapping(value = "/winelog/", method = RequestMethod.GET)
-    public ResponseEntity<List<WineLogEntry>> listAllRecipes() {
-        List<WineLogEntry> wl = wineService.findAllLogEntries();
+    public ResponseEntity<List<WineLogEntry>> listAllWineLogEntries() {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    	
+        List<WineLogEntry> wl = wineService.findAllLogEntries(auth.getName());
         if(wl.isEmpty()){
             return new ResponseEntity<List<WineLogEntry>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
         }

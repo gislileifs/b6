@@ -87,6 +87,7 @@ md-input-container {
 /** Side nav **/
  .md-button {    
     text-transform: none !important;/*For Lower case use lowercase*/
+    min-width: 1%;
 }
 
 /** Angular App **/

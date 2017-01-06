@@ -13,6 +13,13 @@ public class WineLogEntry {
 	String name;
 	String type;
 	Date date;
+	
+	String username;
+	
+	public void setUsername( String name ) {
+		username = name;
+	}
+	
 	public Date getDate() {
 		return date;
 	}

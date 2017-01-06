@@ -9,6 +9,7 @@
 	<link href="resources/bootstrap/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet"/>
 	<link href="resources/css/angular-material.min.css" rel="stylesheet"/>
 	<link href="resources/css/main.css" rel="stylesheet"/>
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 	
 	 
 	<script src="resources/jquery/dist/jquery.js" type="text/javascript"><!-- required for FF3 and Opera --></script>
 	
@@ -66,11 +67,9 @@
 
     <md-content flex="" layout-padding="">
     
-        <div>
-          <md-button ng-click="toggleLeft()" class="md-primary" hide-gt-md="">
-            Valkostir
-          </md-button>
-        </div>
+        <md-button ng-click="toggleLeft()" class="md-primary" style="margin:0px; padding: 0px" hide-gt-md="">
+        <i class="material-icons">view_headline</i>    
+        </md-button>
     
     <div class="slide-animate-container">
     <div class="slide-animate" ng-include="template"></div>

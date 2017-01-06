@@ -33,14 +33,18 @@
 			<md-input-container>
                <input type="text" ng-model="wineLogEntry.initialGravity" id="rinitialGravity" 
                ng-pattern="/^\d{0,9}(\.\d{1,9})?$/"
-               class="form-control input-sm" placeholder="Enter gravity"/>
+               class="form-control input-sm" placeholder="Flotvog fyrir"/>
 			</md-input-container>
 			<md-input-container>
                <input type="number" ng-model="wineLogEntry.finalGravity" id="rfinalGravity" 
                ng-pattern="/^\d{0,9}(\.\d{1,9})?$/"
-               class="form-control input-sm" placeholder="Enter gravity"/>
+               class="form-control input-sm" placeholder="Flotvog eftir"/>
 			</md-input-container>
-			
+			<md-input-container>
+               <input type="number" ng-model="wineLogEntry.sugar" id="rsugar" 
+               ng-pattern="/^\d{0,9}(\.\d{1,9})?$/"
+               class="form-control input-sm" placeholder="Eftirsætusykur"/>
+			</md-input-container>			
 			<table class="table" id="stepsTable">
 					<caption style="fontsize: 16pt">Skref</caption>
 					<tr ng-repeat="s in wineLogEntry.steps track by $index">
@@ -68,7 +72,7 @@
       <md-button ng-click="cancel()">
         Hætta við
       </md-button>
-      <input type="submit"  value="{{!recipe.id ? 'Add Recipe' : 'Update Recipe'}}" class="btn btn-primary btn-sm" />
+      <input type="submit"  value="{{!wineLogEntry.id ? 'Skrá vín' : 'Uppfæra vín'}}" class="btn btn-primary btn-sm" />
       
     </md-dialog-actions>
   </form>

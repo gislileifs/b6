@@ -40,11 +40,6 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
         	  $("#wineName").focus();
         	  //alert("setFocus");
           }
-          
-          var toggleButtons = function() {
-        	  $("#addWine").toggle();
-        	  $("#cancelAddWine").toggle();        	  
-          }
  
          self.updateWineLogEntry = function(entry, id){
               WineService.updateLogEntry(entry, id)
@@ -70,7 +65,7 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
  
           self.submit = function() {
         	  //alert(JSON.stringify(self.recipe));
-        	  self.wineLogEntry.date = $scope.myDate;
+        	  //self.wineLogEntry.date = $scope.myDate;
               if(self.wineLogEntry.id===null){
                   console.log('Saving New wine log', self.wineLogEntry);    
                   self.createLogEntry(self.wineLogEntry);
@@ -79,8 +74,7 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
                   console.log('wine log updated with id ', self.wineLogEntry.id);
               }
               self.reset();
-              toggleButtons();
-              $("#editPanel").fadeOut('fast');
+              //$("#editPanel").fadeOut('fast');
           };
                
           self.edit = function(event, id){
@@ -102,7 +96,7 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
               }
            
               self.wineLogEntry.steps = trimArray(self.wineLogEntry.steps);
-              $scope.myDate = new Date(self.wineLogEntry.date);
+              //$scope.myDate = new Date(self.wineLogEntry.date);
               self.wineLogEntry.date = new Date(self.wineLogEntry.date);
               for( var i = 0; i < self.wineLogEntry.steps.length; i++ ) {
             	  self.wineLogEntry.steps[i].date = new Date(self.wineLogEntry.steps[i].date);
@@ -127,6 +121,7 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
               fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
             })
             .then(function(answer) {
+            	console.log("save wine");
             	self.submit();
             	//alert(answer.name);
               $scope.status = 'You said the information was "' + answer + '".';
@@ -174,11 +169,27 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
         	    };
         	    
         	    $scope.submit = function() {
-        	    	$mdDialog.hide($scope.recipe);
+        	    	$mdDialog.hide($scope.wineLogEntry);
         	    }
+        	    
+                var createStep = function() {
+              	  var step = new Object();
+              	  step.date = new Date();
+              	  step.text = "";
+              	  return step;
+                }
                 
                 $scope.addStep = function() {
-              	  $scope.wineLogEntry.steps.push("");
+              	  //$scope.wineLogEntry.steps.push("");
+                	var newStep = createStep();
+              	  var len = $scope.wineLogEntry.steps.length;
+              	  if( len > 0 ) {
+              		  newStep.date = $scope.wineLogEntry.steps[len-1].date;
+              	  }
+              	  else {
+              		  newStep.date = $scope.wineLogEntry.date;
+              	  }
+              	  $scope.wineLogEntry.steps.push(newStep);
                 }
                 
                 $scope.deleteStep = function(index) {
@@ -241,7 +252,7 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
         		  newStep.date = self.wineLogEntry.steps[len-1].date;
         	  }
         	  else {
-        		  newStep.date = $scope.myDate;
+        		  newStep.date = self.wineLogEntry.date;
         	  }
         	  self.wineLogEntry.steps.push(newStep);
         	  var i = self.wineLogEntry.steps.length - 1;
@@ -268,7 +279,7 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
               self.wineLogEntry.date = new Date();
 
               //self.wineLogEntry.steps.push(createStep());
-              $scope.myDate = new Date();
+              //$scope.myDate = new Date();
               $scope.myForm.$setPristine(); //reset Form
           };
           

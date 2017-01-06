@@ -98,15 +98,16 @@ public class MyMongo {
 		return r;
 	}
 	
-	public RecipeList getAllRecipes() {
+	public RecipeList getAllRecipes(String username) {
 		RecipeList result = new RecipeList();
-		List<Recipe> recipes = getAllRecipesAsList();
+		List<Recipe> recipes = getAllRecipesAsList(username);
 		result.add(recipes);
 		return result;
 	}
 	
-	public List<WineLogEntry> getWineLog() {
+	public List<WineLogEntry> getWineLog(String username) {
 		Query q = new Query().with(new Sort(Sort.Direction.DESC, "date"));
+		q.addCriteria( Criteria.where("username").is(username));
 		List<WineLogEntry> wineLog = mongoOperation.find(q, WineLogEntry.class);
 		return wineLog  ;
 	}

@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,9 +23,9 @@ public class WineServiceImpl implements WineService{
      
 //    private static List<Recipe> recipes;
  
-    public List<WineLogEntry> findAllLogEntries() {
+    public List<WineLogEntry> findAllLogEntries(String username) {
     	//System.out.println( "findAllRecipes!" );
-        return mongo.getWineLog();
+        return mongo.getWineLog(username);
     }
      
     public WineLogEntry findById(String id) {
@@ -39,11 +41,15 @@ public class WineServiceImpl implements WineService{
      
     public void saveLogEntry(WineLogEntry wle) {
     	System.out.println("WineServiceImpl: saveWineLogEntry. steps: " + wle.getSteps() );
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    	wle.setUsername(auth.getName());
     	mongo.insert(wle);;
     }
  
     public void updateLogEntry(WineLogEntry wle) {
     	//System.out.println("updateWLE. Name: " + recipe.getName() + " steps: " + recipe.getSteps() );
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    	wle.setUsername(auth.getName());
     	mongo.save(wle);
     }
  

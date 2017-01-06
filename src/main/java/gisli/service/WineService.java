@@ -16,7 +16,7 @@ public interface WineService {
      
     void deleteLogEntryById(String id);
  
-    List<WineLogEntry> findAllLogEntries(); 
+    List<WineLogEntry> findAllLogEntries(String username); 
      
     void deleteAllLogEntries();
      
