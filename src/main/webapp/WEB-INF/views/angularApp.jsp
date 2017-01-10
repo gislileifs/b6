@@ -53,6 +53,9 @@
         <md-button ng-click="showWinelog()" >
         	Víngerðardagbók
         </md-button class="row">   
+        <md-button ng-click="showUsers()">
+        	Notendur
+        </md-button class="row">   
         <a class="md-button" href="javascript:formSubmit()">
          Skrá út: ${pageContext.request.userPrincipal.name}
          </a>
