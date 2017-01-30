@@ -25,6 +25,7 @@
       <script src="resources/js/angular/recipeController.js"><!--xx--></script>
       <script src="resources/js/angular/wineService.js"><!--xx--></script>
       <script src="resources/js/angular/wineController.js"><!--xx--></script>
+      <script src="resources/js/angular/userController.js"><!--xx--></script>
 
 </head>
 <body my-document-click='' class="angularAppBody">
@@ -52,6 +53,9 @@
         </md-button class="navButton">
         <md-button ng-click="showWinelog()" >
         	Víngerðardagbók
+        </md-button class="row">   
+        <md-button ng-click="showLists()">
+        	Listar
         </md-button class="row">   
         <md-button ng-click="showUsers()">
         	Notendur

@@ -114,12 +114,18 @@ app.controller('NavCtrl', ['$scope', '$timeout', '$mdSidenav', '$log', function 
 		  }
 
 		  $scope.showWinelog = function() {
-			  //alert( "R: " + $scope.recipesDisplayed + ", W: " + $scope.winelogDisplayed );
-
 			  $scope.recipesDisplayed = false;
 			  $scope.winelogDisplayed = true;
 			  $scope.template = "resources/js/angular/winelog.jsp";
 		      $mdSidenav('left').close()
+		  }
+		  
+		  $scope.showUsers = function() {
+			  $scope.template = "resources/js/angular/users.jsp";
+		  }
+		  
+		  $scope.showLists = function() {
+			  $scope.template = "resources/js/angular/lists.jsp";
 		  }
 	    
 	    $scope.isOpenRight = function(){

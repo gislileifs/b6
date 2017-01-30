@@ -65,8 +65,8 @@ public class MyMongo {
 	}
 
 	public void removeWineLogEntry( String id ) {
-		Query query = new Query(Criteria.where("_id").is(id));
 		mongoOperation.remove( query, WineLogEntry.class );
+		Query query = new Query(Criteria.where("_id").is(id));
 	}
 	
 	public void removeAllRecipes() {
@@ -124,4 +124,16 @@ public class MyMongo {
 		User u = mongoOperation.findOne( query, User.class );
 		return u;
 	}
+	
+	public List<User> getUsers() {
+		List<User> users = mongoOperation.findAll(User.class);
+		return users;
+	}
+	
+	public ItemList getList( String id ) {
+		Query query = new Query(Criteria.where("_id").is(id));
+		ItemList il = mongoOperation.findOne( query, ItemList.class );
+		return il;
+	}
+	
 }

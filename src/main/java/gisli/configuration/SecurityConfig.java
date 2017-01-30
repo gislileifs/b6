@@ -35,6 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
+		System.out.println("Configuring security");
+		
 	  http.authorizeRequests()
 	  	.antMatchers("/login", "/resources/**", "/images/**").permitAll()
 		.antMatchers("/**").access("hasRole('ROLE_ADMIN')")

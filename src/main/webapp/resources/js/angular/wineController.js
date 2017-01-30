@@ -131,7 +131,6 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
           };
           
           self.displayWineLogEntry = function(ev) {
-        	  //alert(self.recipe.name);
             $mdDialog.show({
                 locals:{dataToPass: self.wineLogEntry},                
               controller: DialogController,
