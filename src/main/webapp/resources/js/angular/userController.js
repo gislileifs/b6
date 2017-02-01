@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('UserController', ['$scope', '$mdDialog', function($scope, $mdDialog) {
+app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function($scope, UserService, $mdDialog) {
 	var self = this;
     self.user={id:null,name:'',username:'',password:''};
 	
@@ -22,14 +22,18 @@ app.controller('UserController', ['$scope', '$mdDialog', function($scope, $mdDia
         fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
       })
       .then(function(answer) {
+    	  //alert(JSON.stringify(answer));
       	console.log("save user");
-      	self.submit();
-      	alert(answer.username);
-        $scope.status = 'You said the information was "' + answer + '".';
+      	self.saveUser(answer);
+      	//alert(answer.username);
       }, function() {
         $scope.status = 'You cancelled the dialog.';
       });
     };
+    
+    self.saveUser = function(user) {
+    	
+    }
 	
     function DialogController($scope, $mdDialog, dataToPass) {
   	  $scope.user = dataToPass;
@@ -48,7 +52,7 @@ app.controller('UserController', ['$scope', '$mdDialog', function($scope, $mdDia
   	    };
   	    
   	    $scope.submit = function() {
-  	    	$mdDialog.hide($scope.wineLogEntry);
+  	    	$mdDialog.hide($scope.user);
   	    }
     }
     DialogController.$inject = ['$scope','$mdDialog','dataToPass'];

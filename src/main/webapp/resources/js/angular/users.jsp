@@ -2,6 +2,6 @@
 	ng-controller="UserController as ctrl">
 
 	Users
-	<button type="button" class="btn custom-width" ng-click="ctrl.editUser()">Create</button>
+	<button type="button" class="btn custom-width" ng-click="ctrl.editUser($event, user.id)">Create</button>
 	
 </div>

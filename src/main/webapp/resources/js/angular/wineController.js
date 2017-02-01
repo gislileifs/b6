@@ -32,6 +32,7 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
           };
           
           self.addLogEntry = function(event) {
+        	  console.log("addLogEntry");
         	  self.reset();
         	  self.editWineLogEntry(event);
           }
@@ -108,7 +109,6 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
           };
           
           self.editWineLogEntry = function(ev) {
-        	  //alert(self.recipe.name);
             $mdDialog.show({
                 locals:{dataToPass: self.wineLogEntry},                
               controller: DialogController,
@@ -279,7 +279,7 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
 
               //self.wineLogEntry.steps.push(createStep());
               //$scope.myDate = new Date();
-              $scope.myForm.$setPristine(); //reset Form
+              //$scope.myForm.$setPristine(); //reset Form
           };
           
           self.alcohol = function() {
