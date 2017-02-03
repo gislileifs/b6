@@ -125,6 +125,11 @@ public class MyMongo {
 		return u;
 	}
 	
+	public void deleteUser(String id) {
+		Query query = new Query(Criteria.where("_id").is(id));
+		mongoOperation.remove( query, User.class );	
+	}
+	
 	public List<User> getUsers() {
 		List<User> users = mongoOperation.findAll(User.class);
 		return users;
