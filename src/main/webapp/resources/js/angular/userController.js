@@ -3,9 +3,10 @@
 app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function($scope, UserService, $mdDialog) {
 	var self = this;
     self.user={id:null,name:'',username:'',password:''};
+    self.users=[];
 	
 	self.createUser = function() {
-		alert("Boom!");
+		
 	}
 	
     self.editUser = function(ev) {
@@ -32,7 +33,7 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
     };
     
     self.saveUser = function(user) {
-    	
+    	UserService.saveUser(user);
     }
 	
     function DialogController($scope, $mdDialog, dataToPass) {

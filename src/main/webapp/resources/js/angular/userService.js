@@ -1,9 +1,9 @@
 'use strict';
  
-app.factory('WineService', ['$http', '$q', function($http, $q){
+app.factory('UserService', ['$http', '$q', function($http, $q){
     return {
          
-            fetchUsersg: function() {
+            fetchUsers: function() {
                     return $http.get('user/')
                             .then(
                                     function(response){
