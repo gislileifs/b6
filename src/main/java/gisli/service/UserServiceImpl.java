@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
 	public void deleteUser(String id) {
 		// TODO Auto-generated method stub
 		mongo.deleteUser(id);
+		
 	}
 
 }
