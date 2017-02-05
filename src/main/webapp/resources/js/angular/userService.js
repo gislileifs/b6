@@ -2,7 +2,7 @@
  
 app.factory('UserService', ['$http', '$q', function($http, $q){
     return {
-         
+    
             fetchUsers: function() {
                     return $http.get('user/')
                             .then(
@@ -23,7 +23,6 @@ app.factory('UserService', ['$http', '$q', function($http, $q){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                    	//alert(JSON.stringify(errResponse));
                                     	$("#errorDiv").html(JSON.stringify(errResponse));
                                         console.error('Error while creating wine entry');
                                         return $q.reject(errResponse);
@@ -32,8 +31,7 @@ app.factory('UserService', ['$http', '$q', function($http, $q){
             },
              
             deleteUser: function(id){
-            	//alert( "deleting log entry" + id );
-                    return $http.delete('winelog/'+id)
+                    return $http.delete('user/'+id)
                             .then(
                                     function(response){
                                         return response.data;

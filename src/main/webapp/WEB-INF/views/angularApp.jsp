@@ -25,6 +25,7 @@
       <script src="resources/js/angular/recipeController.js"><!--xx--></script>
       <script src="resources/js/angular/wineService.js"><!--xx--></script>
       <script src="resources/js/angular/wineController.js"><!--xx--></script>
+      <script src="resources/js/angular/userService.js"><!--xx--></script>
       <script src="resources/js/angular/userController.js"><!--xx--></script>
 
 </head>

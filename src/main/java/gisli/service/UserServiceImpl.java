@@ -2,9 +2,14 @@ package gisli.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import gisli.MyMongo;
 import gisli.model.User;
 
+@Service("userService")
+@Transactional
 public class UserServiceImpl implements UserService {
 
 	MyMongo mongo = new MyMongo(); 

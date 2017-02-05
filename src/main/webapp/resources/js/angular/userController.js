@@ -5,12 +5,8 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
     self.user={id:null,name:'',username:'',password:''};
     self.users=[];
 	
-	self.createUser = function() {
-		
-	}
-	
     self.editUser = function(ev) {
-  	  //alert(self.recipe.name);
+    	console.log("edit user");
       $mdDialog.show({
           locals:{dataToPass: self.user},                
         controller: DialogController,
@@ -23,16 +19,15 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
         fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
       })
       .then(function(answer) {
-    	  //alert(JSON.stringify(answer));
       	console.log("save user");
       	self.saveUser(answer);
-      	//alert(answer.username);
       }, function() {
         $scope.status = 'You cancelled the dialog.';
       });
     };
     
     self.saveUser = function(user) {
+    	console.log("Save user: " + JSON.stringify(user) );
     	UserService.saveUser(user);
     }
 	
