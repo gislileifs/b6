@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getAllUsers() {
+		System.out.println("UserService.getAllUsers");
 		return mongo.getUsers();
 	}
 

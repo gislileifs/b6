@@ -4,7 +4,21 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
 	var self = this;
     self.user={id:null,name:'',username:'',password:''};
     self.users=[];
-	
+
+    self.fetchUsers = function(){
+        UserService.fetchUsers()
+            .then(
+                         function(d) {
+                              self.users = d;
+                         },
+                          function(errResponse){
+                              console.error('Error while fetching winelog');
+                          }
+                 );
+    };
+    
+    self.fetchUsers();
+    
     self.editUser = function(ev) {
     	console.log("edit user");
       $mdDialog.show({
