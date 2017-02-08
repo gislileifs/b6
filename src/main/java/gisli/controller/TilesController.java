@@ -6,6 +6,8 @@ import gisli.MyMongo;
 
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -44,8 +46,8 @@ public class TilesController {
     @RequestMapping(value = "/page2", method = RequestMethod.GET)
     public String page2(ModelMap model) {
         model.addAttribute("greeting", "Tiles! Spring 4 MVC");
-        
-        RecipeList recipes = mongo.getAllRecipes();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        RecipeList recipes = mongo.getAllRecipes(auth.getName());
         model.addAttribute("recipes", recipes );
         
         return "tiles/page2";
@@ -78,8 +80,9 @@ public class TilesController {
         model.addAttribute("greeting", id);
         
 		mongo.removeRecipe(id);
-        
-        RecipeList recipes = mongo.getAllRecipes();
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        RecipeList recipes = mongo.getAllRecipes(auth.getName());
         model.addAttribute("recipes", recipes );
         
         return "tiles/page2";

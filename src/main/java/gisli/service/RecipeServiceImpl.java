@@ -72,7 +72,8 @@ public class RecipeServiceImpl implements RecipeService{
     }
  
     private List<Recipe> populateRecipes(){
-        List<Recipe> recipes = mongo.getAllRecipesAsList();
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<Recipe> recipes = mongo.getAllRecipesAsList(auth.getName());
         return recipes;
     }
 

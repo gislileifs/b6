@@ -67,7 +67,8 @@ public class WineServiceImpl implements WineService{
     }
  
     private List<WineLogEntry> populateWineLog(){
-        List<WineLogEntry> wle = mongo.getWineLog();
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<WineLogEntry> wle = mongo.getWineLog(auth.getName());
         return wle;
     }
 

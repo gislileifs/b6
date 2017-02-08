@@ -65,8 +65,8 @@ public class MyMongo {
 	}
 
 	public void removeWineLogEntry( String id ) {
-		mongoOperation.remove( query, WineLogEntry.class );
 		Query query = new Query(Criteria.where("_id").is(id));
+		mongoOperation.remove( query, WineLogEntry.class );
 	}
 	
 	public void removeAllRecipes() {
