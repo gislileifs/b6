@@ -7,6 +7,8 @@ app.factory('UserService', ['$http', '$q', function($http, $q){
                     return $http.get('user/')
                             .then(
                                     function(response){
+                                    	console.log("UserService.fetchUsers called");
+                                    	console.log(JSON.stringify(response.data));
                                         return response.data;
                                     }, 
                                     function(errResponse){

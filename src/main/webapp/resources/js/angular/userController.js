@@ -10,6 +10,7 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
             .then(
                          function(d) {
                               self.users = d;
+                              console.log("Controller: self.users: " + JSON.stringify(d));
                          },
                           function(errResponse){
                               console.error('Error while fetching winelog');
