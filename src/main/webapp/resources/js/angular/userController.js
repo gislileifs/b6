@@ -36,6 +36,7 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
       .then(function(answer) {
       	console.log("save user");
       	self.saveUser(answer);
+      	//self.fetchUsers();
       }, function() {
         $scope.status = 'You cancelled the dialog.';
       });
