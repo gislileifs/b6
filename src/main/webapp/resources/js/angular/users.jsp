@@ -28,7 +28,7 @@
 	
 	</div>
 	
-	<button type="button" class="btn custom-width" ng-click="ctrl.editUser($event, user.id)">Create</button>
+	<button type="button" class="btn custom-width" ng-click="ctrl.addUser($event)">Create</button>
 
 <div id="errorDiv"></div>	
 </div>
