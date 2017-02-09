@@ -12,7 +12,7 @@ app.factory('UserService', ['$http', '$q', function($http, $q){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while fetching wine log');
+                                        console.error('Error while fetching users'+ JSON.stringify(errResponse));
                                         return $q.reject(errResponse);
                                     }
                             );

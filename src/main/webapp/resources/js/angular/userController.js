@@ -8,12 +8,12 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
     self.fetchUsers = function(){
         UserService.fetchUsers()
             .then(
-                         function(d) {
-                              self.users = d;
-                              console.log("Controller: self.users: " + JSON.stringify(d));
+                         function(u) {
+                              self.users = u;
+                              console.log("Controller: users updated");
                          },
                           function(errResponse){
-                              console.error('Error while fetching winelog');
+                              console.error('Error while fetching users. ' + JSON.stringify(errResponse));
                           }
                  );
     };
@@ -65,12 +65,15 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
     
     self.saveUser = function(user) {
     	console.log("saveUser: " + JSON.stringify(user) );
-    	UserService.saveUser(user).then(
-    			self.fetchUsers(),
+    	UserService.saveUser(user);
+    	/*
+    	.then(
+    			self.fetchUsers,
     			function(error) {
     				console.log("Error while saving user: " + error);
     			}
-    			)
+    			);
+    			*/
     }
 	
     function DialogController($scope, $mdDialog, dataToPass) {

@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void saveUser(User user) {
 		mongo.save(user);
+		System.out.println("After mongo.save. User actually saved. " + user.toString());
 	}
 
 	@Override
@@ -27,7 +28,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllUsers() {
 		System.out.println("UserService.getAllUsers");
-		return mongo.getUsers();
+		System.out.println("UserServiceImpl: getAllUsers");
+		return mongo.getUsers();		
 	}
 
 	@Override
