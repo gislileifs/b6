@@ -22,6 +22,7 @@ app.factory('UserService', ['$http', '$q', function($http, $q){
                     return $http.post('user/', user)
                             .then(
                                     function(response){
+                                    	console.log("User saved");D
                                         return response.data;
                                     }, 
                                     function(errResponse){

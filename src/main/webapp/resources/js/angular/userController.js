@@ -20,7 +20,16 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
     
     self.fetchUsers();
     
-    self.editUser = function(ev) {
+    self.reset = function() {
+    	self.user={id:null,name:'',username:'',password:''};
+    }
+    
+    self.addUser = function(ev) {
+    	self.reset();
+    	self.editUser(ev);
+    }
+    
+    self.editUser = function(ev, id) {
     	console.log("edit user");
       $mdDialog.show({
           locals:{dataToPass: self.user},                
@@ -34,7 +43,7 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
         fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
       })
       .then(function(answer) {
-      	console.log("save user");
+      	console.log("save user " + JSON.stringify(answer));
       	self.saveUser(answer);
       	//self.fetchUsers();
       }, function() {
@@ -42,8 +51,21 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
       });
     };
     
+    self.edit = function(event, id){
+        console.log('id to be edited', id);
+        
+        for(var i = 0; i < self.users.length; i++){
+            if(self.users[i].id === id) {
+               self.user = angular.copy(self.users[i]);
+               break;
+            }
+        }
+        
+        self.editUser( event );
+    };
+    
     self.saveUser = function(user) {
-    	console.log("Save user: " + JSON.stringify(user) );
+    	console.log("saveUser: " + JSON.stringify(user) );
     	UserService.saveUser(user);
     }
 	
