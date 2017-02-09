@@ -43,8 +43,8 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
         fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
       })
       .then(function(answer) {
-      	console.log("save user " + JSON.stringify(answer));
-      	self.saveUser(answer);
+      	console.log("Returned from dialog " + JSON.stringify(answer));
+      	self.submit();
       }, function() {
         $scope.status = 'You cancelled the dialog.';
       });
@@ -63,17 +63,20 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
         self.editUser( event );
     };
     
+    self.submit = function() {
+    	self.saveUser(self.user);
+    	self.reset();
+    };
+    
     self.saveUser = function(user) {
     	console.log("saveUser: " + JSON.stringify(user) );
-    	UserService.saveUser(user);
-    	/*
+    	UserService.saveUser(user)
     	.then(
     			self.fetchUsers,
     			function(error) {
     				console.log("Error while saving user: " + error);
     			}
     			);
-    			*/
     }
 	
     function DialogController($scope, $mdDialog, dataToPass) {
