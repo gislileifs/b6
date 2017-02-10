@@ -4,6 +4,7 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
 	var self = this;
     self.user={id:null,name:'',username:'',password:''};
     self.users=[];
+    self.showRemove = false;
 
     self.fetchUsers = function(){
         UserService.fetchUsers()
@@ -43,8 +44,14 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
         fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
       })
       .then(function(answer) {
-      	console.log("Returned from dialog " + JSON.stringify(answer));
-      	self.submit();
+    	  if( typeof answer == 'string' && answer.startsWith("remove:")) {
+    		  var list = answer.split(":");
+    		  //alert(list[1]);
+    		  self.deleteUser(list[1]);
+    	  }
+    	  else {
+	      	self.submit();
+    	  }
       }, function() {
         $scope.status = 'You cancelled the dialog.';
       });
@@ -64,7 +71,7 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
     };
     
     self.submit = function() {
-    	console.log("dialog submitted. Before save user. User: " + JSON.stringify(self.user)));
+    	//console.log("dialog submitted. Before save user. User: " + JSON.stringify(self.user));
     	self.saveUser(self.user);
     	console.log("After save user");
     	self.reset();
@@ -79,6 +86,16 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
     				console.log("Error while saving user: " + error);
     			}
     			);
+    }
+    
+    self.deleteUser = function(id) {
+    	UserService.deleteUser(id)
+    	.then(
+    			self.fetchUsers,
+    			function(error) {
+    				console.log("Error while deleting user: " + JSON.stringify(error));
+    			}
+    		);
     }
 	
     function DialogController($scope, $mdDialog, dataToPass) {
@@ -97,10 +114,18 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
   	      $mdDialog.hide(answer);
   	    };
   	    
+        $scope.prepareRemoval = function() {
+        	$scope.showRemove = true;
+        }
+        
+        $scope.removeUser = function(id) {
+        	$mdDialog.hide("remove:"+id);
+	  	}
+  	    
   	    $scope.submit = function() {
   	    	$mdDialog.hide($scope.user);
   	    }
     }
     DialogController.$inject = ['$scope','$mdDialog','dataToPass'];
-	
+    
 }]);

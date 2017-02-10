@@ -29,7 +29,11 @@ public class SecUserDetailsService implements UserDetailsService{
     	role.add( new UserRole( 0, "ROLE_ADMIN") );
         
     	//User user = new User( "gisli", "gisli.123", true, role );
-        User user = new User( username, username + ".123", true, role );
+    	User user = mongo.getUser(username);
+    	//System.out.println("In SecUserDetails. user: " + theuser.toString() );
+        //User user = new User( username, username + ".123", true, role );
+    	user.setEnabled(true);
+    	user.setUserRole(role);
         
         if(user == null){
             throw new UsernameNotFoundException(username);

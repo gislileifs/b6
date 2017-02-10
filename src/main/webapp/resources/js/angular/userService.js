@@ -33,7 +33,8 @@ app.factory('UserService', ['$http', '$q', function($http, $q){
             },
              
             deleteUser: function(id){
-                    return $http.delete('user/'+id)
+            	console.log("userService->deleteUser. id=" + id);
+                    return $http.delete('user/'+ id)
                             .then(
                                     function(response){
                                         return response.data;

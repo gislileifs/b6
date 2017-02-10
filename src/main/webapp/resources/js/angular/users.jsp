@@ -20,6 +20,7 @@
   		<i class="fa fa-pencil"></i>
   	</td>
 	<td ng-bind="u.name"></td>
+	<td ng-bind="u.username"></td>
 	</tr>
 	</tbody>
 	</table>

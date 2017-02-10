@@ -34,6 +34,9 @@
 
       <span flex></span>
 
+        <md-button type="button" ng-show="user.id != null && !showRemove" ng-click="prepareRemoval()" class="btn" style="float:left">Eyða notanda</md-button>
+        <md-button type="button" ng-show="showRemove" ng-click="removeUser( user.id )" class="btn" style="float:left">Eyða í alvöru</md-button>
+
       <md-button ng-click="cancel()">
         Hætta við
       </md-button>
