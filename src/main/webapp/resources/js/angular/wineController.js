@@ -75,13 +75,10 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
                   console.log('wine log updated with id ', self.wineLogEntry.id);
               }
               self.reset();
-              //$("#editPanel").fadeOut('fast');
           };
                
           self.edit = function(event, id){
               console.log('id to be edited', id);
-              //$("#editPanel").fadeIn('fast');
-              //toggleButtons();
               
               for(var i = 0; i < self.wineLog.length; i++){
                   if(self.wineLog[i].id === id) {

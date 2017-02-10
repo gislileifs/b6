@@ -8,7 +8,6 @@ app.factory('UserService', ['$http', '$q', function($http, $q){
                             .then(
                                     function(response){
                                     	console.log("UserService.fetchUsers called");
-                                    	console.log(JSON.stringify(response.data));
                                         return response.data;
                                     }, 
                                     function(errResponse){
@@ -22,7 +21,7 @@ app.factory('UserService', ['$http', '$q', function($http, $q){
                     return $http.post('user/', user)
                             .then(
                                     function(response){
-                                    	console.log("User saved");D
+                                    	console.log("User saved");
                                         return response.data;
                                     }, 
                                     function(errResponse){

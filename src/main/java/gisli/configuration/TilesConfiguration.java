@@ -64,6 +64,7 @@ public class TilesConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/img/**").addResourceLocations("/resources/img/");
         registry.addResourceHandler("/images/**").addResourceLocations("file:/Library/apache-tomcat-8.0.33/img/");
     }
 

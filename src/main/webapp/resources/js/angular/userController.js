@@ -64,7 +64,9 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
     };
     
     self.submit = function() {
+    	console.log("dialog submitted. Before save user. User: " + JSON.stringify(self.user)));
     	self.saveUser(self.user);
+    	console.log("After save user");
     	self.reset();
     };
     
