@@ -141,4 +141,14 @@ public class MyMongo {
 		return il;
 	}
 	
+	public List<ItemList> getLists() {
+		List<ItemList> lists = mongoOperation.findAll(ItemList.class);
+		return lists;
+	}
+	
+	public void deleteList(String id) {
+		Query query = new Query(Criteria.where("_id").is(id));
+		mongoOperation.remove( query, ItemList.class );	
+	}
+	
 }

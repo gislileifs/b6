@@ -2,26 +2,26 @@
 
 app.controller('ListController', ['$scope', 'ListService', '$mdDialog', function($scope, ListService, $mdDialog) {
 	var self = this;
-    self.currentList={name:'',date: new Date(),text:''};
-    self.rootList = {id:'',date: new Date(), text:''};
+    self.list={name:'',date: new Date(),text:'', items: []};
+    self.lists = [];
 
-    self.fetchList = function(){
-        ListService.fetchList()
+    self.fetchLists = function(){
+        ListService.fetchLists()
             .then(
                          function(u) {
-                              self.rootList = u;
+                              self.lists = u;
                               //console.log("Controller:  updated");
                          },
                           function(errResponse){
-                              console.error('Error while fetching list. ' + JSON.stringify(errResponse));
+                              console.error('Error while fetching lists. ' + JSON.stringify(errResponse));
                           }
                  );
     };
     
-    self.fetchList();
+    self.fetchLists();
     
     self.reset = function() {
-        self.currentList={name:'',date: new Date(),text:''};
+        self.list={name:'',date: new Date(),text:'',items:[]};
     }
     
     self.addList = function(ev) {
@@ -32,7 +32,7 @@ app.controller('ListController', ['$scope', 'ListService', '$mdDialog', function
     self.editList = function(ev, id) {
     	console.log("edit list");
       $mdDialog.show({
-          locals:{dataToPass: self.user},                
+          locals:{dataToPass: self.list},                
         controller: DialogController,
        /* controllerAs: 'dialog', */
         preserveScope: true,
@@ -56,60 +56,50 @@ app.controller('ListController', ['$scope', 'ListService', '$mdDialog', function
       });
     };
     
-    var slugify = function(text) {
-	  return text.toString().toLowerCase()
-	    .replace(/\s+/g, '-')           // Replace spaces with -
-	    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-	    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-	    .replace(/^-+/, '')             // Trim - from start of text
-	    .replace(/-+$/, '');            // Trim - from end of text
-	}
-    
-    self.findList = function(key)
-    
+   
     self.edit = function(event, id){
         console.log('id to be edited', id);
         
-        for(var i = 0; i < self.users.length; i++){
-            if(self.users[i].id === id) {
-               self.user = angular.copy(self.users[i]);
+        for(var i = 0; i < self.lists.length; i++){
+            if(self.lists[i].id === id) {
+               self.list = angular.copy(self.lists[i]);
                break;
             }
         }
         
-        self.editUser( event );
+        self.editList( event );
     };
     
     self.submit = function() {
     	//console.log("dialog submitted. Before save user. User: " + JSON.stringify(self.user));
-    	self.saveUser(self.user);
-    	console.log("After save user");
+    	self.saveList(self.list);
+    	console.log("After save list");
     	self.reset();
     };
     
-    self.saveUser = function(user) {
-    	console.log("saveUser: " + JSON.stringify(user) );
-    	UserService.saveUser(user)
+    self.saveList = function(user) {
+    	console.log("save list: " + JSON.stringify(user) );
+    	ListService.saveList(list)
     	.then(
-    			self.fetchUsers,
+    			self.fetchLists,
     			function(error) {
-    				console.log("Error while saving user: " + error);
+    				console.log("Error while saving list: " + error);
     			}
     			);
     }
     
-    self.deleteUser = function(id) {
-    	UserService.deleteUser(id)
+    self.deleteList = function(id) {
+    	ListService.deleteList(id)
     	.then(
-    			self.fetchUsers,
+    			self.fetchLists,
     			function(error) {
-    				console.log("Error while deleting user: " + JSON.stringify(error));
+    				console.log("Error while deleting list: " + JSON.stringify(error));
     			}
     		);
     }
 	
     function DialogController($scope, $mdDialog, dataToPass) {
-  	  $scope.user = dataToPass;
+  	  $scope.list = dataToPass;
   	  $scope.showRemove = false;
   	  
   	    $scope.hide = function() {

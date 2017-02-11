@@ -9,6 +9,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "lists")
 public class ItemList {
+	
+	public ItemList() {
+		items = new ArrayList<Item>();
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -34,17 +39,26 @@ public class ItemList {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public ArrayList<List> getItems() {
-		return items;
-	}
-	public void setItems(ArrayList<List> items) {
-		this.items = items;
-	}
+
 	@Id
 	String id;
+	String parent;
+	public String getParent() {
+		return parent;
+	}
+	public void setParent(String parent) {
+		this.parent = parent;
+	}
+	public void setItems(ArrayList<Item> items) {
+		this.items = items;
+	}
+	public ArrayList<Item> getItems() {
+		return this.items;
+	}
 	
 	String name;
 	Date date;
 	String text;
-	ArrayList<List> items;
+	ArrayList<Item> items;
+	
 }
