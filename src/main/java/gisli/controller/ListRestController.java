@@ -6,11 +6,14 @@ import gisli.service.ListService;
 import gisli.model.ItemList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class ListRestController {
 
 	@Autowired
@@ -32,7 +35,7 @@ public class ListRestController {
 	}	
 
 	@RequestMapping(value = "list/{id}", method = RequestMethod.DELETE)
-	public void deleteList(@RequestParam String id) {
+	public void deleteList(@PathVariable String id) {
 		listService.deleteList(id);
 	}	
 }

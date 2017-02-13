@@ -40,7 +40,7 @@ app.factory('ListService', ['$http', '$q', function($http, $q){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while deleting recipe');
+                                        console.error('Error while deleting list');
                                         return $q.reject(errResponse);
                                     }
                             );

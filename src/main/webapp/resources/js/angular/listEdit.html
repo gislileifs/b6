@@ -1,0 +1,46 @@
+<md-dialog aria-label="Lists">
+  <form id="listForm" ng-cloak ng-submit="submit()">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{list.name}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+          <input type="hidden" ng-model="list.id" />
+         
+          <div style="margin-top: 0px; margin-bottom: 30px">
+         <md-datepicker ng-model="list.date" id="rdate" md-placeholder="Enter date"></md-datepicker>
+		</div>
+          <md-input-container>
+              <input type="text" md-autofocus ng-model="list.name" class="form-control wide" 
+              id="name" placeholder="Nafn" required ng-minlength="3"/>
+          </md-input-container>
+          <md-input-container>
+              <input type="text" ng-model="list.text" class="form-control wide" 
+              id="listtext" placeholder="Texti" required ng-minlength="3"/>
+          </md-input-container>
+         
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+
+      <span flex></span>
+
+        <md-button type="button" ng-show="list.id != null && !showRemove" ng-click="prepareRemoval()" class="btn" style="float:left">Eyða lista</md-button>
+        <md-button type="button" ng-show="showRemove" ng-click="removeList( list.id )" class="btn" style="float:left">Eyða í alvöru</md-button>
+
+      <md-button ng-click="cancel()">
+        Hætta við
+      </md-button>
+      <input type="submit"  value="{{!list.id ? 'Vista lista' : 'Uppfæra lista'}}" class="btn btn-primary btn-sm" />
+      
+    </md-dialog-actions>
+  </form>
+</md-dialog>

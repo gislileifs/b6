@@ -27,6 +27,8 @@
       <script src="resources/js/angular/wineController.js"><!--xx--></script>
       <script src="resources/js/angular/userService.js"><!--xx--></script>
       <script src="resources/js/angular/userController.js"><!--xx--></script>
+      <script src="resources/js/angular/listController.js"><!--xx--></script>
+      <script src="resources/js/angular/listService.js"><!--xx--></script>
 
 </head>
 <body my-document-click='' class="angularAppBody">

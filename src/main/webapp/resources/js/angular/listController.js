@@ -14,6 +14,7 @@ app.controller('ListController', ['$scope', 'ListService', '$mdDialog', function
                          },
                           function(errResponse){
                               console.error('Error while fetching lists. ' + JSON.stringify(errResponse));
+                              $("#errorDiv").html(JSON.stringify(errResponse));
                           }
                  );
     };
@@ -36,7 +37,7 @@ app.controller('ListController', ['$scope', 'ListService', '$mdDialog', function
         controller: DialogController,
        /* controllerAs: 'dialog', */
         preserveScope: true,
-        templateUrl: 'resources/js/angular/userEdit.html',
+        templateUrl: 'resources/js/angular/listEdit.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
@@ -66,6 +67,7 @@ app.controller('ListController', ['$scope', 'ListService', '$mdDialog', function
                break;
             }
         }
+        self.list.date = new Date(self.list.date);
         
         self.editList( event );
     };
@@ -77,8 +79,8 @@ app.controller('ListController', ['$scope', 'ListService', '$mdDialog', function
     	self.reset();
     };
     
-    self.saveList = function(user) {
-    	console.log("save list: " + JSON.stringify(user) );
+    self.saveList = function(list) {
+    	console.log("save list: " + JSON.stringify(list) );
     	ListService.saveList(list)
     	.then(
     			self.fetchLists,
@@ -118,7 +120,7 @@ app.controller('ListController', ['$scope', 'ListService', '$mdDialog', function
         	$scope.showRemove = true;
         }
         
-        $scope.removeUser = function(id) {
+        $scope.removeList = function(id) {
         	$mdDialog.hide("remove:"+id);
 	  	}
   	    

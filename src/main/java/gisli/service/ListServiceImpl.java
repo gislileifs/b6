@@ -5,6 +5,11 @@ import gisli.model.ItemList;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service("listService")
+@Transactional
 public class ListServiceImpl implements ListService {
 	
 	MyMongo mongo = new MyMongo();
