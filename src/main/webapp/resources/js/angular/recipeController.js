@@ -211,7 +211,7 @@ app.controller('RecipeController', ['$scope', '$document', 'RecipeService', '$md
               controller: DialogController,
              /* controllerAs: 'dialog', */
               preserveScope: true,
-              templateUrl: 'resources/js/angular/recipeEdit.html',
+              templateUrl: 'resources/html/recipeEdit.html',
               parent: angular.element(document.body),
               targetEvent: ev,
               clickOutsideToClose:true,
@@ -233,7 +233,7 @@ app.controller('RecipeController', ['$scope', '$document', 'RecipeService', '$md
               controller: DialogController,
              /* controllerAs: 'dialog', */
               preserveScope: true,
-              templateUrl: 'resources/js/angular/recipeDisplay.html',
+              templateUrl: 'resources/html/recipeDisplay.html',
               parent: angular.element(document.body),
               targetEvent: ev,
               clickOutsideToClose:true,

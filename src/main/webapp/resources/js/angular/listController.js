@@ -37,7 +37,7 @@ app.controller('ListController', ['$scope', 'ListService', '$mdDialog', function
         controller: DialogController,
        /* controllerAs: 'dialog', */
         preserveScope: true,
-        templateUrl: 'resources/js/angular/listEdit.html',
+        templateUrl: 'resources/html/listEdit.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,

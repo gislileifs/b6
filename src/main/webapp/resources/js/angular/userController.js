@@ -37,7 +37,7 @@ app.controller('UserController', ['$scope', 'UserService', '$mdDialog', function
         controller: DialogController,
        /* controllerAs: 'dialog', */
         preserveScope: true,
-        templateUrl: 'resources/js/angular/userEdit.html',
+        templateUrl: 'resources/html/userEdit.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,

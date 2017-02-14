@@ -122,10 +122,12 @@ app.controller('NavCtrl', ['$scope', '$timeout', '$mdSidenav', '$log', function 
 		  
 		  $scope.showUsers = function() {
 			  $scope.template = "resources/js/angular/users.jsp";
+		      $mdSidenav('left').close()
 		  }
 		  
 		  $scope.showLists = function() {
 			  $scope.template = "resources/js/angular/lists.jsp";
+		      $mdSidenav('left').close()
 		  }
 	    
 	    $scope.isOpenRight = function(){

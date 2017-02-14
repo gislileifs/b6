@@ -111,7 +111,7 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
               controller: DialogController,
              /* controllerAs: 'dialog', */
               preserveScope: true,
-              templateUrl: 'resources/js/angular/winelogEdit.html',
+              templateUrl: 'resources/html/winelogEdit.html',
               parent: angular.element(document.body),
               targetEvent: ev,
               clickOutsideToClose:true,
@@ -133,7 +133,7 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
               controller: DialogController,
              /* controllerAs: 'dialog', */
               preserveScope: true,
-              templateUrl: 'resources/js/angular/winelogDisplay.html',
+              templateUrl: 'resources/html/winelogDisplay.html',
               parent: angular.element(document.body),
               targetEvent: ev,
               clickOutsideToClose:true,
