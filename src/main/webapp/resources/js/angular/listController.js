@@ -57,19 +57,31 @@ app.controller('ListController', ['$scope', 'ListService', '$mdDialog', function
       });
     };
     
-   
-    self.edit = function(event, id){
-        console.log('id to be edited', id);
-        
+    var getList = function(listId) {
         for(var i = 0; i < self.lists.length; i++){
-            if(self.lists[i].id === id) {
+            if(self.lists[i].id === listId) {
                self.list = angular.copy(self.lists[i]);
                break;
             }
         }
         self.list.date = new Date(self.list.date);
+        for( var i = 0; i < self.list.items.length; i++ ) {
+      	  self.list.items[i].date = new Date(self.list.items[i].date);
+        }  
+        return self.list;
+    }
+   
+    self.edit = function(event, id){
+        console.log('id to be edited', id);
+
+        self.list = getList(id);
         
         self.editList( event );
+    };
+    
+    self.display = function(event,id){
+        self.list = getList(id);       
+        self.displayList(event);
     };
     
     self.submit = function() {
@@ -99,6 +111,28 @@ app.controller('ListController', ['$scope', 'ListService', '$mdDialog', function
     			}
     		);
     }
+    
+
+    
+    self.displayList = function(ev) {
+        $mdDialog.show({
+            locals:{dataToPass: self.list},                
+          controller: DialogController,
+          preserveScope: true,
+          templateUrl: 'resources/html/listDisplay.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+        .then(function(answer) {
+        	//self.remove(answer);
+        	//alert(answer.name);
+          $scope.status = 'You said the information was "' + answer + '".';
+        }, function() {
+          $scope.status = 'You cancelled the dialog.';
+        });
+      };
 	
     function DialogController($scope, $mdDialog, dataToPass) {
   	  $scope.list = dataToPass;
@@ -126,6 +160,33 @@ app.controller('ListController', ['$scope', 'ListService', '$mdDialog', function
   	    
   	    $scope.submit = function() {
   	    	$mdDialog.hide($scope.user);
+  	    }
+  	    
+  	    var createItem = function() {
+  	  	  var item = new Object();
+  	  	  item.date = new Date();
+  	  	  item.text = "";
+  	  	  return item;
+  	    }
+  	    
+  	    $scope.addItem = function() {
+  	    	console.log("In addItem");
+  	  	  var newItem = createItem();
+  	  	  var len = $scope.list.items.length;
+  	  	  if( len > 0 ) {
+  	  		  newItem.date = $scope.list.items[len-1].date;
+  	  	  }
+  	  	  else {
+  	  		  newItem.date = new Date();
+  	  	  }
+  	  	  $scope.list.items.push(newItem);
+  	  	  var i = $scope.list.items.length - 1;
+  	  	  angular.element("#item0").focus();
+  	  	  $('#itemlist li:last-child:input').focus();
+  	    }
+  	    
+  	    $scope.deleteItem = function(index) {
+  	  	  $scope.list.items.splice(index, 1);
   	    }
     }
     DialogController.$inject = ['$scope','$mdDialog','dataToPass'];

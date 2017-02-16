@@ -47,12 +47,13 @@
       </md-toolbar>
       
       <md-content layout-padding="" ng-controller="LeftCtrl">
-      <div layout="column">
+      <div layout="column" layout-align="start stretch">
         <md-button ng-click="close()" class="md-primary row" hide-gt-md="">
           Close Sidenav Left
-        </md-button class="row">
+        </md-button>
         <md-button ng-click="showRecipes()">
         	Uppskriftir
+        	<span flex></span>
         </md-button class="navButton">
         <md-button ng-click="showWinelog()" >
         	Víngerðardagbók

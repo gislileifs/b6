@@ -23,8 +23,8 @@
    	<td ng-click="ctrl.edit($event, u.id)" style="padding-left: 20px">
   		<i class="fa fa-pencil"></i>
   	</td>
-	<td ng-bind="u.name"></td>
-	<td ng-bind="u.text"></td>
+	<td ng-click="ctrl.display($event, u.id)" ng-bind="u.name"></td>
+	<td ng-click="ctrl.display($event, u.id)" ng-bind="u.text"></td>
 	</tr>
 	</tbody>
 	</table>

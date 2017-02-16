@@ -1,0 +1,29 @@
+<md-dialog> 
+<md-toolbar>
+	<div class="md-toolbar-tools">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<h4 class="modal-title">
+	<span ng-bind="list.name"></span>
+</h4>
+	</div>
+</md-toolbar> 
+<md-dialog-content>
+
+<div class="md-dialog-content">
+	<h4>{{list.text}}</h4>
+
+	      	<ol id="itemlist">
+	      	<li ng-repeat="k in list.items track by $index" set-focus='$last' id="{{'item' + $index}}">
+	      	<span ng-bind="list.items[$index].date | date:'d.M.yyyy'"></span>
+	      	<br>
+	      	{{k.text}}
+	      	</li>
+	      </ol>
+
+</div>
+</md-dialog-content> 
+<md-dialog-actions> 
+<md-button type="button"
+	class="btn btn-default" ng-click="cancel()">Loka</md-button> 
+</md-dialog-actions> 
+</md-dialog>

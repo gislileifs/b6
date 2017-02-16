@@ -26,6 +26,24 @@
               id="listtext" placeholder="Texti" required ng-minlength="3"/>
           </md-input-container>
          
+			<table class="table" id="itemsTable">
+					<caption style="fontsize: 16pt">Atriði</caption>
+					<tr ng-repeat="s in list.items track by $index">
+					<td>
+					<md-datepicker ng-model="list.items[$index].date" md-placeholder="Enter date"></md-datepicker>											
+					<textarea ng-model="list.items[$index].text" class="form-control" focus="$last" />
+					</td>
+					<td>
+					<button type="button" tabindex="-1" class="btn custom-width" ng-click="deleteItem($index)">Eyða</button>
+					</td>
+					</tr>
+					<tr>
+					<td colspan="2" style="textalign: left">
+					<button type="button" class="btn" ng-click="addItem()">Bæta við</button>
+					</td>
+					</tr>
+			</table>         
+         
       </div>
     </md-dialog-content>
 
