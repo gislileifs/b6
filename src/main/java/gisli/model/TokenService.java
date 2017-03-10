@@ -13,7 +13,7 @@ public class TokenService implements PersistentTokenRepository {
     @Autowired
     TokenRepository repository;
 
-    @Override
+    //@Override
     public void createNewToken(PersistentRememberMeToken token) {
     	String myNull = null;
     	
@@ -24,18 +24,18 @@ public class TokenService implements PersistentTokenRepository {
                 token.getDate()));
     }
 
-    @Override
+    //@Override
     public void updateToken(String series, String value, Date lastUsed) {
         Token token = repository.findBySeries(series);
         repository.save(new Token(token.getId(), token.getUsername(), series, value, lastUsed));
     }
 
-    @Override
+    //@Override
     public PersistentRememberMeToken getTokenForSeries(String seriesId) {
         return repository.findBySeries(seriesId);
     }
 
-    @Override
+    //@Override
     public void removeUserTokens(String username) {
         Token token = repository.findByUsername(username);
         if (token != null) {
