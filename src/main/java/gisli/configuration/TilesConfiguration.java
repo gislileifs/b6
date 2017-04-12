@@ -22,7 +22,7 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "gisli")
-@Import({ SecurityConfig.class })
+//@Import({ SecurityConfig.class })
 public class TilesConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean

@@ -12,11 +12,15 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
  
-public class TilesInitializer implements WebApplicationInitializer {
+public class TilesInitializer //implements WebApplicationInitializer
+extends AbstractAnnotationConfigDispatcherServletInitializer
+{
  
     public void onStartup(ServletContext container) throws ServletException {
     	System.out.println("xxxx - At tiles startup");
+    	/*
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(TilesConfiguration.class);
         ctx.setServletContext(container);
@@ -25,7 +29,7 @@ public class TilesInitializer implements WebApplicationInitializer {
  
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
-        
+        */
         EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
@@ -33,7 +37,24 @@ public class TilesInitializer implements WebApplicationInitializer {
         FilterRegistration.Dynamic characterEncoding = container.addFilter("characterEncoding", characterEncodingFilter);
         characterEncoding.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
         
+        super.onStartup(container);
+        
         System.out.println("xxxx - End of tiles startup");
+    }
+    
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[] { TilesConfiguration.class };
+    }
+ 
+      @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return null; //new Class[] { TilesInitializer.class };
+    }
+ 
+    @Override
+    protected String[] getServletMappings() {
+        return new String[] { "/" };
     }
  
 }
