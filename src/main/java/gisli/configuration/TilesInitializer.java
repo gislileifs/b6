@@ -8,6 +8,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -17,9 +18,10 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class TilesInitializer //implements WebApplicationInitializer
 extends AbstractAnnotationConfigDispatcherServletInitializer
 {
- 
+	private static final Logger logger = Logger.getLogger(TilesInitializer.class);
+
     public void onStartup(ServletContext container) throws ServletException {
-    	System.out.println("xxxx - At tiles startup");
+    	logger.debug("Initializing webapp");
     	/*
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(TilesConfiguration.class);
@@ -39,7 +41,7 @@ extends AbstractAnnotationConfigDispatcherServletInitializer
         
         super.onStartup(container);
         
-        System.out.println("xxxx - End of tiles startup");
+        logger.debug("End of webapp initialization");
     }
     
     @Override

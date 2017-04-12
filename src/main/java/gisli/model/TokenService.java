@@ -2,6 +2,7 @@ package gisli.model;
 
 import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -10,11 +11,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class TokenService implements PersistentTokenRepository {
 
+	private static final Logger logger = Logger.getLogger(TokenService.class);
+	
     @Autowired
     TokenRepository repository;
 
     //@Override
     public void createNewToken(PersistentRememberMeToken token) {
+    	logger.debug("createNewToken. token: " + token.toString());
     	String myNull = null;
     	
         repository.save(new Token(myNull,

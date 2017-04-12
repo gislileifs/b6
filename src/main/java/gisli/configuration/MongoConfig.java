@@ -1,5 +1,6 @@
 package gisli.configuration;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
@@ -20,6 +21,7 @@ import org.springframework.core.env.Environment;
 @EnableMongoRepositories("gisli")
 @PropertySource("classpath:mongo.properties")
 public class MongoConfig extends AbstractMongoConfiguration {
+	private static final Logger logger = Logger.getLogger(MongoConfig.class);
 
 	@Autowired
 	Environment env;
@@ -33,6 +35,7 @@ public class MongoConfig extends AbstractMongoConfiguration {
 	@Bean
 	public Mongo mongo() throws Exception {
 		String host = env.getProperty("mongo.host");
+		logger.debug("Mongo host: " + host);
 		return new MongoClient(host);	}
 
 }
