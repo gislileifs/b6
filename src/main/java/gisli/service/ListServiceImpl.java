@@ -5,6 +5,7 @@ import gisli.model.ItemList;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ListServiceImpl implements ListService {
 	
-	MyMongo mongo = new MyMongo();
+	@Autowired
+	MongoService mongo;
 	
 	//@Override
 	public void saveList(ItemList il) {

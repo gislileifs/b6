@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.core.Authentication;
@@ -17,7 +18,9 @@ import gisli.model.Recipe;
 @Transactional
 public class RecipeServiceImpl implements RecipeService{
 	
-	MyMongo mongo = new MyMongo(); 
+	//MyMongo mongo = new MyMongo();
+	@Autowired
+	MongoService mongo;
 	
     private static final AtomicLong counter = new AtomicLong();
      

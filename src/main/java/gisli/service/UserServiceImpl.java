@@ -2,6 +2,7 @@ package gisli.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +13,9 @@ import gisli.model.User;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-	MyMongo mongo = new MyMongo(); 
+	//MyMongo mongo = new MyMongo();
+	@Autowired
+	MongoService mongo;
 	
 	public void saveUser(User user) {
 		mongo.save(user);

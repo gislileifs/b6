@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,9 @@ import gisli.model.WineLogEntry;
 @Transactional
 public class WineServiceImpl implements WineService{
 	
-	MyMongo mongo = new MyMongo(); 
+	//MyMongo mongo = new MyMongo();
+	@Autowired
+	MongoService mongo;
 	
     private static final AtomicLong counter = new AtomicLong();
      
