@@ -46,12 +46,12 @@ extends AbstractAnnotationConfigDispatcherServletInitializer
     
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] { TilesConfiguration.class };
+        return new Class[] { SecurityConfig.class };
     }
  
       @Override
     protected Class<?>[] getServletConfigClasses() {
-        return null; //new Class[] { TilesInitializer.class };
+        return new Class[] { TilesConfiguration.class };
     }
  
     @Override

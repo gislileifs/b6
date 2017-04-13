@@ -96,7 +96,7 @@ md-input-container {
 
 /** Angular App **/
 body.angularAppBody {
-	background-image: url("/images/background1.jpg");
+	background-image: url("../img/background1.jpg");
 }
 
 .navButtonx {
