@@ -18,7 +18,6 @@ import gisli.model.Recipe;
 @Transactional
 public class RecipeServiceImpl implements RecipeService{
 	
-	//MyMongo mongo = new MyMongo();
 	@Autowired
 	MongoService mongo;
 	

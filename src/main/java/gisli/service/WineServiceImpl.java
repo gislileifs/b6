@@ -18,7 +18,6 @@ import gisli.model.WineLogEntry;
 @Transactional
 public class WineServiceImpl implements WineService{
 	
-	//MyMongo mongo = new MyMongo();
 	@Autowired
 	MongoService mongo;
 	

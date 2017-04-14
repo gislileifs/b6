@@ -13,7 +13,6 @@ import gisli.model.User;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-	//MyMongo mongo = new MyMongo();
 	@Autowired
 	MongoService mongo;
 	

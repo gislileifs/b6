@@ -25,7 +25,7 @@ public class UserRestController {
 	
     @RequestMapping(value = "/user", method = RequestMethod.POST)
 	public void saveUser( @RequestBody User user ) {
-    	System.out.println( "Saving user: " + user.toString() );
+    	logger.debug( "Saving user: " + user.toString() );
 		userService.saveUser(user);
 	}
 	

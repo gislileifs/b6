@@ -2,8 +2,7 @@ package gisli.controller;
 
 import java.util.List;
 
-import gisli.MyMongo;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.Authentication;
@@ -21,12 +20,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import gisli.model.*;
+import gisli.service.MongoService;
 
 @Controller
 @RequestMapping("/")
 public class TilesController {
  
-    MyMongo mongo = new MyMongo();
+	@Autowired
+	MongoService mongo;
 
     @RequestMapping(method = RequestMethod.GET)
     public String sayHello(ModelMap model) {
