@@ -1,6 +1,5 @@
 package gisli.service;
 
-import gisli.MyMongo;
 import gisli.model.ItemList;
 
 import java.util.List;

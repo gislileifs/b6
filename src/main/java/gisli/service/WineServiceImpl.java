@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import gisli.MyMongo;
 import gisli.model.WineLogEntry;
  
 @Service("wineService")
@@ -21,7 +20,7 @@ public class WineServiceImpl implements WineService{
 	@Autowired
 	MongoService mongo;
 	
-    private static final AtomicLong counter = new AtomicLong();
+    //private static final AtomicLong counter = new AtomicLong();
      
 //    private static List<Recipe> recipes;
  
