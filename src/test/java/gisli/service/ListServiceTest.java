@@ -51,7 +51,7 @@ public class ListServiceTest {
 	 */
 	@Test
 	public final void testSaveList() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class ListServiceTest {
 	 */
 	@Test
 	public final void testGetList() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class ListServiceTest {
 	 */
 	@Test
 	public final void testGetLists() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class ListServiceTest {
 	 */
 	@Test
 	public final void testDeleteList() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 }

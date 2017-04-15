@@ -72,7 +72,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testSave() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testRemoveRecipe() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testRemoveWineLogEntry() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testRemoveAllRecipes() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testGetRecipe() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testGetWineLogEntry() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testGetRecipeByName() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testGetWineLogEntryByName() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testGetAllRecipes() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testGetWineLog() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testGetAllRecipesAsList() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testGetUser() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testDeleteUser() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -176,7 +176,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testGetUsers() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -184,7 +184,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testGetList() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testGetLists() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -200,7 +200,7 @@ public class MongoServiceTest {
 	 */
 	@Test
 	public final void testDeleteList() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 }

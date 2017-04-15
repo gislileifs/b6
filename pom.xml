@@ -16,6 +16,7 @@
          <release-train>Hopper-SR1</release-train>
          <mysql.connector.version>6.0.3</mysql.connector.version>
          <log4j.version>1.2.17</log4j.version>
+         <catalina.home>/Library/apache-tomcat-8.0.33</catalina.home>
     </properties>
   
     <dependencies>
