@@ -24,8 +24,8 @@ import org.springframework.test.context.junit4.*;
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration
 public class MongoServiceTest {
-	@Autowired
-	MongoService mongo;
+	//@Autowired
+	MongoService mongo = new MongoServiceImpl();
 	
 	/**
 	 * @throws java.lang.Exception
