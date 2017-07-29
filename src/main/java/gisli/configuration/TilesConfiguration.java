@@ -83,7 +83,7 @@ public class TilesConfiguration extends WebMvcConfigurerAdapter {
         tilesConfigurer.setCheckRefresh(true);
         return tilesConfigurer;
     }
- 
+ /*
 	@Bean(name = "dataSource")
 	public DriverManagerDataSource dataSource() {
 		logger.debug( "MySQL Datasource being initialized..." );
@@ -95,4 +95,5 @@ public class TilesConfiguration extends WebMvcConfigurerAdapter {
 	    System.out.println("Finished initializing mysql...");
 	    return driverManagerDataSource;
 	}
+	*/
 }

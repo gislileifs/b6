@@ -12,7 +12,7 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
                                function(d) {
                                     self.wineLog = d;
                                     for(var i = 0; i < self.wineLog.length; i++){
-                                    	self.wineLog[i].date = new Date(self.wineLog[i].date);
+                                    		self.wineLog[i].date = new Date(self.wineLog[i].date);
                                     }
                                },
                                 function(errResponse){
@@ -32,13 +32,13 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
           };
           
           self.addLogEntry = function(event) {
-        	  console.log("addLogEntry");
-        	  self.reset();
-        	  self.editWineLogEntry(event);
+	        	  console.log("addLogEntry");
+	        	  self.reset();
+	        	  self.editWineLogEntry(event);
           }
           
           function setFocus() {
-        	  $("#wineName").focus();
+        	  	$("#wineName").focus();
         	  //alert("setFocus");
           }
  
@@ -88,16 +88,17 @@ app.controller('WineController', ['$scope', 'WineService', '$mdDialog', function
               }
 
               if( self.wineLogEntry.steps == null ) {
-            	  self.wineLogEntry.steps = [];
-            	  var step = createStep();
-            	  self.wineLogEntry.steps.push(step);
+	            	  self.wineLogEntry.steps = [];
+	            	  var step = createStep();
+	            	  self.wineLogEntry.steps.push(step);
               }
            
               self.wineLogEntry.steps = trimArray(self.wineLogEntry.steps);
               //$scope.myDate = new Date(self.wineLogEntry.date);
               self.wineLogEntry.date = new Date(self.wineLogEntry.date);
               for( var i = 0; i < self.wineLogEntry.steps.length; i++ ) {
-            	  self.wineLogEntry.steps[i].date = new Date(self.wineLogEntry.steps[i].date);
+            	  	console.log(self.wineLogEntry.steps[i].date);
+            	  	self.wineLogEntry.steps[i].date = new Date(self.wineLogEntry.steps[i].date);
             	  //alert(self.wineLogEntry.steps[i].date);
               }
               

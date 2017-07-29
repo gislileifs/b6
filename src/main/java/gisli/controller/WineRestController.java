@@ -99,6 +99,9 @@ public class WineRestController {
         currentEntry.setSteps( wle.getSteps() );
         currentEntry.setSugar( wle.getSugar());
           
+        //logger.debug(wle.toString());
+        System.out.println(wle);
+        
         wineService.updateLogEntry(currentEntry);
         return new ResponseEntity<WineLogEntry>(currentEntry, HttpStatus.OK);
     }

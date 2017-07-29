@@ -34,6 +34,7 @@ app.factory('WineService', ['$http', '$q', function($http, $q){
              
             updateLogEntry: function(wineLogEntry, id){
             	//alert( "service: " + JSON.stringify(recipe) );
+            		//console.log(JSON.stringify(wineLogEntry));
                     return $http.put('winelog/'+id, wineLogEntry)
                             .then(
                                     function(response){

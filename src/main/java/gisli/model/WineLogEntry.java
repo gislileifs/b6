@@ -101,6 +101,9 @@ public class WineLogEntry {
 	}
 	
 	public String toString() {
-		return "Wine log entry: name: " + name + ", type: " + type;
+		String str = "Name: " + name;
+		for( WineLogEntryStep s : steps )
+			str += s.getDate() + "\n";
+		return str;
 	}
 }
